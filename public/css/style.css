@@ -1,0 +1,322 @@
+[data-bs-theme=light] {
+    --navbar-item-opacity: 0.4;
+}
+
+[data-bs-theme=dark] {
+    --navbar-item-opacity: 1;
+
+    .input-group svg {
+        fill: #fff;
+    }
+
+    /*! Input Search */
+    .search.input-group {
+        border: 1px solid #fff;
+        border-radius: 50px;
+    }
+}
+
+.search {
+    .form-control {
+        border: 0;
+        padding: 0.5rem 1rem;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+
+    button {
+        background: var(--bs-body-bg);
+        border: 0;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+}
+
+/*! Sidebar hover */
+#sidebar {
+    li {
+        border-radius: var(--bs-nav-pills-border-radius);
+        transition: all 0.2s ease-in;
+
+        &:hover {
+            background: rgba(var(--bs-secondary-bg-rgb), var(--navbar-item-opacity));
+        }
+    }
+}
+
+#smSidebar {
+    li {
+        transition: all 0.2s ease-in;
+
+        &:hover {
+            background: rgba(var(--bs-secondary-bg-rgb), var(--navbar-item-opacity));
+        }
+    }
+}
+
+/*! Sidebar Toggle Button */
+#sidebarToggle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #183153;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+}
+
+#sidebarToggle:after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: #ffd401;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+}
+
+#sidebarToggle:hover {
+    color: #183153;
+}
+
+#sidebarToggle:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+}
+
+#sidebarToggle span {
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    padding: 18px 25px;
+    color: #fff;
+    font-size: 1.125em;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+}
+
+#sidebarToggle:hover span {
+    color: #183153;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*! User-info */
+#user-info {
+    cursor: pointer;
+}
+
+/*! Data Table */
+/*? Select rows show */
+.dt-length select.dt-input {
+    background: var(--bs-body-bg) !important;
+    text-align: center;
+}
+
+/*? Select Pagination */
+.dt-length select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: transparent !important;
+    border: none !important;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/*? Search Bar */
+.dt-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    input {
+        /* width: 100%; */
+        outline: none;
+        transition: all 0.5s ease;
+
+        &:focus,
+        &:hover {
+            outline: none;
+            border-color: rgba(129, 140, 248);
+            background-color: #fff;
+            box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+        }
+    }
+
+    label {
+        font-weight: 700;
+    }
+}
+
+/*? Info */
+.dt-info {
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-style: italic;
+    color: rgb(237, 85, 85) !important;
+}
+
+/*? Pagination */
+.dt-paging {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    nav {
+        display: flex;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba(84, 153, 30, 0.5) !important;
+            box-shadow: 0 0 0 4px rgba(84, 123, 37, 0.2);
+        }
+    }
+
+    button.current {
+        background: rgba(147, 237, 69, 0.8) !important;
+    }
+}
+
+/*! Dashboard icon */
+.dashboard-icon svg {
+    transition: all 0.5s;
+}
+
+/*! Dashboard table */
+#topsv {
+    background: linear-gradient(45deg, rgba(33, 150, 243, 0.25) 0%, rgba(33, 153, 9, 0.4) 100%);
+    background-size: 200% 100%;
+    animation: background 6s ease infinite;
+}
+
+.dt-type-numeric,
+.dt-type-date {
+    text-align: left !important;
+
+    &:first-child {
+        text-align: right !important;
+    }
+}
+
+@keyframes background {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/*! Faculty */
+.faculty-item {
+    &:hover .faculty-edit {
+        top: -35px;
+    }
+
+    .faculty-edit {
+        height: 4rem;
+        top: 0;
+        right: 30px;
+        transition: all 0.3s ease-out;
+
+        .faculty-action {
+            background: linear-gradient(to bottom, #3E317D 25%, #82ABD3);
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            svg {
+                color: #fff;
+                filter: drop-shadow(0 0 0.75rem #d00);
+            }
+        }
+    }
+}
+
+/*! Credit class */
+.credit-item {
+    &:hover .credit-edit {
+        top: -35px;
+    }
+
+    .credit-edit {
+        height: 4rem;
+        top: 0;
+        right: 30px;
+        transition: all 0.3s ease-out;
+
+        .credit-action {
+            background: linear-gradient(to bottom, #3E317D 25%, #82ABD3);
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            svg {
+                color: #fff;
+                filter: drop-shadow(0 0 0.75rem #d00);
+            }
+        }
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
