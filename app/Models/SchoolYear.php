@@ -12,7 +12,9 @@ class SchoolYear extends Model
     protected $fillable = [
         'semester',
         'school_term',
-        'slug'
+        'slug',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'slug';

@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật lớp hành chính
+    {{ __('Update Formal Class') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Lớp hành chính</h2>
+                <h2>{{ __('Formal Class') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('formal-class.index') }}">
-                                Lớp hành chính
+                                {{ __('Formal Class') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật lớp hành chính</span>
+                            <span>{{ __('Update Formal Class') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật lớp hành chính</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Formal Class') }}</h4>
 
                 <form class="needs-validation" method="POST"
                     action="{{ route('formal-class.update', $formal_class->class_code) }}" novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-6 col-12">
-                            <label for="class_code" class="form-label fw-bold">Lớp hành chính</label>
+                            <label for="class_code" class="form-label fw-bold">{{ __('Formal Class') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="major_code" class="form-label fw-bold">Ngành</label>
+                            <label for="major_code" class="form-label fw-bold">{{ __('Major') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -88,7 +88,7 @@
                                 <select
                                     class="form-select @error('major_code') is-invalid @enderror @if (old('major_code') && !$errors->has('major_code')) is-valid @endif"
                                     id="major_code" name="major_code" aria-label="Select major">
-                                    <option value="">Chọn ngành</option>
+                                    <option value="">{{ __('Select Major') }}</option>
                                     @foreach ($majors as $major)
                                         <option value="{{ $major->major_code }}"
                                             @if ((old('major_code') ?? $major->major_code) === $formal_class->major_code) selected @endif>
@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="mgv" class="form-label fw-bold">Cố vấn học tập</label>
+                            <label for="mgv" class="form-label fw-bold">{{ __('Academic Advisor') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -124,7 +124,7 @@
                                 <select
                                     class="form-select @error('mgv') is-invalid @enderror @if (old('mgv') && !$errors->has('mgv')) is-valid @endif"
                                     id="mgv" name="mgv" aria-label="Select teacher">
-                                    <option value="">Chọn giảng viên</option>
+                                    <option value="">{{ __('Select Teacher') }}</option>
                                     @foreach ($teachers as $teacher)
                                         <option value="{{ $teacher->mgv }}"
                                             @if ((old('mgv') ?? $teacher->mgv) === $formal_class->mgv) selected @endif>
@@ -169,7 +169,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const formalClass = document.getElementById('class_code');
             const maskClass = {
-                mask: '{D}00{CQ}aa00{-B}',
+                mask: '{D}00aaaa00{-B}',
                 lazy: false,
                 blocks: {
                     a: {

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Khoa
+    {{ __('Faculty') }}
 @endsection
 
 @section('content')
@@ -10,9 +10,13 @@
             <div class="add-item"></div>
         @endif
 
+        @if (session('error'))
+            <div class="error-item"></div>
+        @endif
+
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Khoa</h2>
+                <h2>{{ __('Faculty') }}</h2>
 
                 <div>
                     <div class="d-flex align-items-center" aria-label="breadcrumb">
@@ -20,19 +24,48 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Khoa
+                                {{ __('Faculty') }}
                             </li>
                         </ol>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md d-flex justify-content-start justify-content-md-end mt-md-0 mt-3">
+            <div class="col-12 col-md d-flex justify-content-start justify-content-md-end gap-3 mt-md-0 mt-3">
+                {{-- ! Import Excel Form --}}
+                <div id="import-excel-form-faculty" class="d-flex justify-content-center">
+                    <form action="{{ route('import.faculty') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <label for="file-faculty" class="hover-btn-1">
+                            <span>{{ __('Import Faculty Excel') }}</span>
+                            <span></span>
+                        </label>
+                        <input type="file" id="file-faculty" name="file" class="d-none" required>
+
+                        <button type="submit" class="visually-hidden">Import</button>
+                    </form>
+                </div>
+
+                <div id="import-excel-form-major" class="d-flex justify-content-center">
+                    <form action="{{ route('import.major') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <label for="file-major" class="hover-btn-1">
+                            <span>{{ __('Import Major Excel') }}</span>
+                            <span></span>
+                        </label>
+                        <input type="file" id="file-major" name="file" class="d-none" required>
+
+                        <button type="submit" class="visually-hidden">Import</button>
+                    </form>
+                </div>
+
                 <a href="{{ route('faculty.create') }}" class="btn btn-bd-primary d-flex gap-2 align-items-center p-2"
                     style="height: fit-content;">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="size-6"
@@ -41,7 +74,7 @@
                             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
 
-                    <span>Thêm khoa</span>
+                    <span>{{ __('Add Faculty') }}</span>
                 </a>
             </div>
         </div>
@@ -220,6 +253,34 @@
             }
         });
 
+        // Sweet Alert: Error Messages
+        document.addEventListener('DOMContentLoaded', function() {
+            const error_item = document.querySelector('.error-item');
+
+            if (error_item) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    background: "rgb(255, 235, 235)",
+                    color: "rgb(110, 29, 29)",
+                    position: "bottom-end",
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                    customClass: {
+                        closeButton: 'd-flex text-danger',
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "{{ session('error') }}"
+                });
+            }
+        });
+
         // Change Card header border color when theme changed
         const card_header = document.querySelectorAll('.card-header');
 
@@ -253,6 +314,23 @@
                     }
                 });
             });
+        });
+
+        // Import Excel Form
+        let importExcelFormFaculty = document.getElementById('import-excel-form-faculty');
+        let inputFaculty = importExcelFormFaculty.querySelector('input[type="file"]');
+        let submitFaculty = importExcelFormFaculty.querySelector('button[type="submit"]');
+
+        let importExcelFormMajor = document.getElementById('import-excel-form-major');
+        let inputMajor = importExcelFormMajor.querySelector('input[type="file"]');
+        let submitMajor = importExcelFormMajor.querySelector('button[type="submit"]');
+
+        inputFaculty.addEventListener('change', () => {
+            submitFaculty.click();
+        });
+
+        inputMajor.addEventListener('change', () => {
+            submitMajor.click();
         });
     </script>
 @endsection

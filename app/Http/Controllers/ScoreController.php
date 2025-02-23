@@ -14,7 +14,7 @@ use App\Models\Student;
 
 class ScoreController extends Controller
 {
-    public function student()
+    public function student(string $locale = 'vi')
     {
         $first_semester = range(7, 12);
         $second_semester = range(1, 6);
@@ -77,14 +77,14 @@ class ScoreController extends Controller
         return view('score', compact('scores', 'gpa', 'rank', 'school_years', 'change_year'));
     }
 
-    public function changeSchoolYear(string $year)
+    public function changeSchoolYear(string $locale = 'vi', string $year)
     {
         sleep(2);
 
         return response()->json($year);
     }
 
-    public function redirectStudentScore($year)
+    public function redirectStudentScore(string $locale = 'vi', $year)
     {
         $user = Auth::user()->identifier;
         $scores = Score::where('msv', $user)->where('school_year', $year)->get();

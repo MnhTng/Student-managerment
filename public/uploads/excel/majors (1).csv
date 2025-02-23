@@ -1,0 +1,4 @@
+"major_code";"major_name";"faculty_code";"created_at";"updated_at"
+"ATTT";"An toàn thông tin";"CNTT";NULL;NULL
+"BC";"Báo chí";"DPT";NULL;"2024-11-05 01:09:20"
+<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> TypeError: PhpMyAdmin\Encoding::convertString(): Return value must be of type string, bool returned</div></body></html>

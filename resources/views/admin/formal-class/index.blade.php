@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Lớp hành chính
+    {{ __('Formal Class') }}
 @endsection
 
 @section('content')
@@ -10,9 +10,13 @@
             <div class="add-item"></div>
         @endif
 
+        @if (session('error'))
+            <div class="error-item"></div>
+        @endif
+
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Lớp hành chính</h2>
+                <h2>{{ __('Formal Class') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -20,12 +24,12 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Lớp hành chính
+                                {{ __('Formal Class') }}
                             </li>
                         </ol>
                     </nav>
@@ -41,7 +45,7 @@
                             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
 
-                    <span>Thêm lớp hành chính</span>
+                    <span>{{ __('Add Formal Class') }}</span>
                 </a>
             </div>
         </div>
@@ -51,10 +55,10 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Lớp</th>
-                        <th scope="col">Cố vấn học tập</th>
-                        <th scope="col">Ngành</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col">{{ __('Formal Class') }}</th>
+                        <th scope="col">{{ __('Academic Advisor') }}</th>
+                        <th scope="col">{{ __('Major') }}</th>
+                        <th scope="col">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -94,6 +98,21 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    {{-- ! Import Excel Form --}}
+    <div id="import-excel-form" class="d-none d-flex justify-content-center">
+        <form action="{{ route('import.formal-class') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <label for="file" class="hover-btn-1">
+                <span>{{ __('Import Excel') }}</span>
+                <span></span>
+            </label>
+            <input type="file" id="file" name="file" class="d-none" required>
+
+            <button type="submit" class="visually-hidden">Import</button>
+        </form>
     </div>
 
     <script>
@@ -156,6 +175,34 @@
                 Toast.fire({
                     icon: "success",
                     title: "{{ session('success') }}"
+                });
+            }
+        });
+
+        // Sweet Alert: Error Messages
+        document.addEventListener('DOMContentLoaded', function() {
+            const error_item = document.querySelector('.error-item');
+
+            if (error_item) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    background: "rgb(255, 235, 235)",
+                    color: "rgb(110, 29, 29)",
+                    position: "bottom-end",
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                    customClass: {
+                        closeButton: 'd-flex text-danger',
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "{{ session('error') }}"
                 });
             }
         });

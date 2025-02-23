@@ -18,6 +18,8 @@ class CreditClass extends Model
         'msv',
         'subject_code',
         'school_year',
+        'created_at',
+        'updated_at',
     ];
 
     public function teacher()

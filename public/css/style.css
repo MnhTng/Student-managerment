@@ -16,6 +16,22 @@
     }
 }
 
+#toggler-theme {
+    width: fit-content;
+
+    button {
+        aspect-ratio: 1/1;
+        width: fit-content;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.2s ease-out;
+
+        &:hover {
+            background: #ffffff33;
+        }
+    }
+}
+
 .search {
     .form-control {
         border: 0;

@@ -20,7 +20,7 @@ class AdminScoreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $scores = Score::all();
 
@@ -30,7 +30,7 @@ class AdminScoreController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $slug)
+    public function create(string $locale = 'vi', string $slug)
     {
         $slug = Str::of($slug)->explode('-');
 
@@ -45,20 +45,20 @@ class AdminScoreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $credit_class)
+    public function store(Request $request, string $locale = 'vi', $credit_class)
     {
         $request->validate(
             [
                 'score' => 'required|numeric|max:10|min:0',
             ],
             [
-                'score.required' => 'Vui lòng nhập điểm.',
-                'score.numeric' => 'Điểm phải là số.',
-                'score.max' => 'Điểm không được vượt quá 10.',
-                'score.min' => 'Điểm không được nhỏ hơn 0.',
+                'score.required' => __('The :attribute field cannot be empty.'),
+                'score.numeric' => __('The :attribute field is not in the correct format.'),
+                'score.max' => __('The :attribute field must not exceed :max characters.'),
+                'score.min' => __('The :attribute field must have at least :min characters.'),
             ],
             [
-                'score' => 'điểm',
+                'score' => __('Score'),
             ]
         );
 
@@ -71,13 +71,13 @@ class AdminScoreController extends Controller
 
         Score::create($input);
 
-        return Redirect::route('score.show', $credit_class)->with('success', 'Cập nhật điểm thành công.');
+        return Redirect::route('score.show', [$credit_class])->with('success', __('The score has been updated successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         $class = CreditClass::find($id);
         $credit_classes = CreditClass::where('room', $class->room)
@@ -92,13 +92,13 @@ class AdminScoreController extends Controller
             ->get();
 
         // return $scores->where('msv', 'B21DCKT004')->first()->score;
-        return view('admin.score.show', compact('credit_classes', 'scores'));
+        return view('admin.score.show', compact('credit_classes', 'scores', 'id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $locale = 'vi', string $id)
     {
         $slug = Str::of($id)->explode('-');
         $credit_class_id = $slug[0];
@@ -111,20 +111,20 @@ class AdminScoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id, string $credit_class)
+    public function update(Request $request, string $locale = 'vi', string $id, string $credit_class)
     {
         $request->validate(
             [
                 'score' => 'required|numeric|max:10|min:0',
             ],
             [
-                'score.required' => 'Vui lòng nhập điểm.',
-                'score.numeric' => 'Điểm phải là số.',
-                'score.max' => 'Điểm không được vượt quá 10.',
-                'score.min' => 'Điểm không được nhỏ hơn 0.',
+                'score.required' => __('The :attribute field cannot be empty.'),
+                'score.numeric' => __('The :attribute field is not in the correct format.'),
+                'score.max' => __('The :attribute field must not exceed :max characters.'),
+                'score.min' => __('The :attribute field must have at least :min characters.'),
             ],
             [
-                'score' => 'điểm',
+                'score' => __('Score'),
             ]
         );
 
@@ -132,13 +132,13 @@ class AdminScoreController extends Controller
         $score->score = $request->score;
         $score->save();
 
-        return Redirect::route('score.show', $credit_class)->with('success', 'Cập nhật điểm thành công.');
+        return Redirect::route('score.show', [$credit_class])->with('success', __('The score has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $locale = 'vi', string $id)
     {
         //
     }

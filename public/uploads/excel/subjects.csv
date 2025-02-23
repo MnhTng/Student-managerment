@@ -1,0 +1,2 @@
+"subject_code";"subject_name";"credit";"created_at";"updated_at"
+<div class="alert alert-danger" role="alert"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> TypeError: PhpMyAdmin\Encoding::convertString(): Return value must be of type string, bool returned</div></body></html>

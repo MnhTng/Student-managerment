@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# StudentManager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the StudentManager project documentation. This guide will help you set up, configure, and use the StudentManager application.
 
-## About Laravel
+## Table of Contents
+- [Introduction](#introduction)
+- [Objectives](#objectives)
+- [Features](#features)
+- [Technology Stack](#techstack)
+- [Usage](#usage)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📖 <span id="introduction">Introduction</span>
+The Student Management System (SMS) is a web-based application designed to streamline the management of student information, academic records, courses, and attendance. It replaces manual, paper-based processes with a centralized digital platform, enabling educational institutions to efficiently track and manage student data while improving communication between administrators, teachers, and students.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 <span id="objectives">Objectives</span>
+- **Digitize workflows**: Replace paper-based records with a secure, centralized database.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Simplify academic management**: Streamline course assignment, and grade tracking.
 
-## Learning Laravel
+- **Enhance accessibility**: Provide role-based access for administrators, teachers, and students.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **User friendly**: Intuitive interface, easy to use.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🌟 <span id="features">Features</span>
+- Student Profile Management
+    - Create, update, and archive student profiles.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    - Store personal details (ID, name, contact, class, major) and academic history.
 
-## Laravel Sponsors
+    - Export student lists in Excel/PDF formats.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Course & Class Management
+    - Create courses and assign instructors.
 
-### Premium Partners
+    - Schedule classes with a visual calendar interface.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Grade Management
+    - Enter grades per subject.
 
-## Contributing
+    - Automatically calculate GPA, final grades, and academic performance rankings.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Reporting & Analytics
+    - Export academic transcripts.
 
-## Code of Conduct
+    - Export data to various formats (CSV, PDF, etc.).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- User Authentication & Roles
+    - Secure login with Laravel Breeze/Sanctum.
 
-## Security Vulnerabilities
+    - Role-based access:
+        - Admin: Full system control.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        - Instructor: Manage courses, grades, and view student data.
 
-## License
+        - Student: View grades, schedules, and personal information.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- UI/UX Enhancements
+    - Responsive Design:
+        - Optimized for mobile, tablet, and desktop screens.
+
+        - Mobile-first approach with Bootstrap 5 Flexbox/Grid layouts.
+
+    - Light/Dark Theme Toggle:
+        - Users can switch between themes dynamically.
+
+        - Theme preference saved in localStorage for consistency.
+
+    - Multi-language Support:
+        - Supports English and Vietnamese (easily extendable to other languages).
+
+        - Language switcher dropdown in the navigation bar.
+
+        - Translations managed via Laravel’s localization files.
+
+## ⚙️ <span id="techstack">Technology Stack</span>
+- Backend:
+    - Framework: Laravel 11.x (PHP)
+
+    - Database: MySQL
+
+    - Authentication: Laravel Sanctum (API) / Breeze (UI)
+
+    - Localization: Laravel’s built-in multi-language support.
+
+- Frontend:
+    - Templating: Blade
+
+    - Styling: Bootstrap 5, CSS Variables (for theme switching)
+
+    - Dynamic UI: JavaScript, Jquery libraries (chart.js, datatable.js, calendar.js, etc.)
+
+    - Language Management: JSON-based translation files.
+
+- Tools:
+    - Composer, Artisan CLI
+
+    - Git, Postman (API testing)
+
+## 🚀 <span id="usage">Usage</span>
+To use the StudentManager application:
+1. Start the development server: `php artisan serve`
+2. Open your browser and navigate to `http://localhost:3000 (customize configuration in /config)`
+3. Log in with existing credentials.
+    - Admin: emailtestcode321@gmail.com - admin123
+    - Instructor: dtnanh@gmail.com - teacher123
+    - Student: antd.b21kt004@stu.ptit.edu.vn - student123
+4. Use the dashboard to manage students, classes, and generate reports.
+
+<h1 style="text-align:center;">Admin Dashboard</h1>
+<img src="./public/uploads/readme/admin.png">
+
+<h1 style="text-align:center;">Instructor Dashboard</h1>
+<img src="./public/uploads/readme/teacher.png">
+
+<h1 style="text-align:center;">Student Interface</h1>
+<img src="./public/uploads/readme/student.png">

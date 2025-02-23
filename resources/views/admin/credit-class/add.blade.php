@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Thêm lớp tín chỉ
+    {{ __('Add Credit Class') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Lớp tín chỉ</h2>
+                <h2>{{ __('Credit Class') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -21,19 +21,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('credit-class.index') }}">
-                                Lớp tín chỉ
+                                {{ __('Credit Class') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Thêm lớp tín chỉ</span>
+                            <span>{{ __('Add Credit Class') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -43,7 +43,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Thêm lớp tín chỉ</h4>
+                <h4 class="text-danger mb-3">{{ __('Add Credit Class') }}</h4>
 
                 <form class="repeater needs-validation d-grid gap-3" method="POST"
                     action="{{ route('credit-class.store') }}" enctype="multipart/form-data" novalidate>
@@ -51,7 +51,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="room" class="form-label fw-bold">Phòng</label>
+                            <label for="room" class="form-label fw-bold">{{ __('Classroom') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -62,7 +62,8 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('room') is-invalid @enderror @if (old('room') && !$errors->has('room')) is-valid @endif"
-                                    id="room" name="room" placeholder="Phòng" value="{{ old('room') }}">
+                                    id="room" name="room" placeholder="{{ __('Classroom') }}"
+                                    value="{{ old('room') }}">
 
                                 @error('room')
                                     <div class="invalid-feedback">
@@ -79,7 +80,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="school_year" class="form-label fw-bold">Năm học</label>
+                            <label for="school_year" class="form-label fw-bold">{{ __('School Year') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -91,7 +92,7 @@
                                 <select
                                     class="form-select @error('school_year') is-invalid @enderror @if (old('school_year') && !$errors->has('school_year')) is-valid @endif"
                                     id="school_year" name="school_year" aria-label="Select school year">
-                                    <option class="bg-body" value="">Chọn năm học</option>
+                                    <option class="bg-body" value="">{{ __('Select School Year') }}</option>
 
                                     @foreach ($school_years as $year)
                                         <option class="bg-body" value="{{ $year->slug }}"
@@ -118,7 +119,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-12">
-                            <label for="teacher" class="form-label fw-bold">Giảng viên</label>
+                            <label for="teacher" class="form-label fw-bold">{{ __('Teacher') }}</label>
 
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
@@ -131,7 +132,7 @@
                                 <select
                                     class="form-select @error('teacher') is-invalid @enderror @if (old('teacher') && !$errors->has('teacher')) is-valid @endif"
                                     id="teacher" name="teacher" aria-label="Select teacher">
-                                    <option value="">Chọn giảng viên</option>
+                                    <option value="">{{ __('Select Teacher') }}</option>
 
                                     @foreach ($teachers as $teacher)
                                         <option value="{{ $teacher->mgv }}"
@@ -156,7 +157,8 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="student" class="form-label fw-bold">Sinh viên</label>
+                            <label for="student" class="form-label fw-bold">{{ __('Student') }}</label>
+
                             <div data-repeater-list="students">
                                 <div data-repeater-item>
                                     <div class="input-group has-validation mb-3">
@@ -169,7 +171,8 @@
                                         </span>
                                         <input type="text"
                                             class="form-control @error('student') is-invalid @enderror @if (old('student') && !$errors->has('student')) is-valid @endif"
-                                            id="student" name="student" placeholder="Họ tên - Mã sinh viên"
+                                            id="student" name="student"
+                                            placeholder="{{ __('Full Name') }} - {{ __('Student Code') }}"
                                             list="students" value="{{ old('student') }}">
                                         <datalist id="students">
                                             @foreach ($students as $student)
@@ -197,11 +200,12 @@
                                 </div>
                             </div>
 
-                            <input data-repeater-create type="button" value="Thêm sinh viên" class="btn btn-primary" />
+                            <input data-repeater-create type="button" value="{{ __('Add Student') }}"
+                                class="btn btn-primary" />
                         </div>
 
                         <div class="col-12">
-                            <label for="subject" class="form-label fw-bold">Môn học</label>
+                            <label for="subject" class="form-label fw-bold">{{ __('Subject') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -213,7 +217,7 @@
                                 <select
                                     class="form-select @error('subject') is-invalid @enderror @if (old('subject') && !$errors->has('subject')) is-valid @endif"
                                     id="subject" name="subject" aria-label="Select subject">
-                                    <option class="bg-body" value="">Chọn môn học</option>
+                                    <option class="bg-body" value="">{{ __('Select Subject') }}</option>
 
                                     @foreach ($subjects as $subject)
                                         <option class="bg-body" value="{{ $subject->subject_code }}"
@@ -240,7 +244,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="start_time" class="form-label fw-bold">Thời gian bắt đầu</label>
+                            <label for="start_time" class="form-label fw-bold">{{ __('Start Time') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -251,7 +255,7 @@
                                 </span>
                                 <input type="datetime-local"
                                     class="form-control @error('start_time') is-invalid @enderror @if (old('start_time') && !$errors->has('start_time')) is-valid @endif"
-                                    id="start_time" name="start_time" placeholder="Thời gian bắt đầu"
+                                    id="start_time" name="start_time" placeholder="{{ __('Start Time') }}"
                                     value="{{ old('start_time') }}">
 
                                 @error('start_time')
@@ -269,7 +273,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="end_time" class="form-label fw-bold">Thời gian kết thúc</label>
+                            <label for="end_time" class="form-label fw-bold">{{ __('End Time') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -280,7 +284,7 @@
                                 </span>
                                 <input type="datetime-local"
                                     class="form-control @error('end_time') is-invalid @enderror @if (old('end_time') && !$errors->has('end_time')) is-valid @endif"
-                                    id="end_time" name="end_time" placeholder="Thời gian kết thúc"
+                                    id="end_time" name="end_time" placeholder="{{ __('End Time') }}"
                                     value="{{ old('end_time') }}">
 
                                 @error('end_time')

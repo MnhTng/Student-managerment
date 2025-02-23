@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Thành viên lớp
+    {{ __('Class Member') }}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Thành viên lớp</h2>
+                <h2>{{ __('Class Member') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -24,19 +24,19 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('credit-class.index') }}">
-                                    Lớp tín chỉ
+                                    {{ __('Credit Class') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Thành viên lớp
+                                {{ __('Class Member') }}
                             </li>
                         </ol>
                     </nav>
@@ -52,7 +52,7 @@
                             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
 
-                    <span>Thêm thành viên lớp</span>
+                    <span>{{ __('Add Class Member') }}</span>
                 </a>
             </div>
         </div>
@@ -62,11 +62,11 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">MSV</th>
-                        <th scope="col">Họ và tên</th>
-                        <th scope="col">Lớp</th>
-                        <th scope="col">Ngành</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col">{{ __('Student Code') }}</th>
+                        <th scope="col">{{ __('Full Name') }}</th>
+                        <th scope="col">{{ __('Formal Class') }}</th>
+                        <th scope="col">{{ __('Major') }}</th>
+                        <th scope="col">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">

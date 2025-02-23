@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật niên học
+    {{ __('Update School Year') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Niên học</h2>
+                <h2>{{ __('School Year') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -21,19 +21,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('school-year.index') }}">
-                                Niên học
+                                {{ __('School Year') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật niên học</span>
+                            <span>{{ __('Update School Year') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -43,7 +43,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật niên học</h4>
+                <h4 class="text-danger mb-3">{{ __('Update School Year') }}</h4>
 
                 <form class="needs-validation" method="POST" action="{{ route('school-year.update', $school_year->slug) }}"
                     novalidate>
@@ -51,7 +51,7 @@
 
                     <div class="row g-5">
                         <div class="col-lg-4 col-12">
-                            <label for="school_year" class="form-label fw-bold">Năm học</label>
+                            <label for="school_year" class="form-label fw-bold">{{ __('School Year') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -62,7 +62,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('school_year') is-invalid @enderror @if (old('school_year') && !$errors->has('school_year')) is-valid @endif"
-                                    id="school_year" name="school_year" placeholder="Năm học"
+                                    id="school_year" name="school_year" placeholder="{{ __('School Year') }}"
                                     value="{{ old('school_year') ?? $school_year->school_term }}">
 
                                 @error('school_year')
@@ -81,37 +81,36 @@
                     </div>
 
                     <div class="my-3">
-                        <h4 class="mb-3">Kỳ học tùy chọn</h4>
+                        <h4 class="mb-3">{{ __('Semester') }}</h4>
 
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="semester-1" name="semester" value="1"
                                 @if ((old('semester') ?? $school_year->semester) == 1) checked @endif>
-                            <label class="form-check-label" for="semester-1">Kỳ 1</label>
+                            <label class="form-check-label" for="semester-1">{{ __('Semester 1') }}</label>
                         </div>
 
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="semester-2" name="semester" value="2"
                                 @if ((old('semester') ?? $school_year->semester) == 2) checked @endif>
-                            <label class="form-check-label" for="semester-2">Kỳ 2</label>
+                            <label class="form-check-label" for="semester-2">{{ __('Semester 2') }}</label>
                         </div>
 
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="semester-3" name="semester" value="3"
                                 @if ((old('semester') ?? $school_year->semester) == 3) checked @endif>
-                            <label class="form-check-label" for="semester-3">Kỳ
-                                3</label>
+                            <label class="form-check-label" for="semester-3">{{ __('Semester 3') }}</label>
                         </div>
 
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="semester-4" name="semester" value="4"
                                 @if ((old('semester') ?? $school_year->semester) == 4) checked @endif>
-                            <label class="form-check-label" for="semester-4">Kỳ 4</label>
+                            <label class="form-check-label" for="semester-4">{{ __('Semester 4') }}</label>
                         </div>
 
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="semester-5" name="semester" value="5"
                                 @if ((old('semester') ?? $school_year->semester) == 5) checked @endif>
-                            <label class="form-check-label" for="semester-5">Kỳ 5</label>
+                            <label class="form-check-label" for="semester-5">{{ __('Semester 5') }}</label>
                         </div>
                     </div>
 

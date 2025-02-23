@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Trang chủ
+    {{ __('Dashboard') }}
 @endsection
 
 @php
@@ -13,7 +13,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Trang chủ</h2>
+                <h2>{{ __('Dashboard') }}</h2>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">GPA</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('GPA') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -58,7 +58,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Lớp</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Formal Class') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -95,7 +95,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Tín chỉ tích lũy</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Total accumulated credits') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -126,7 +126,7 @@
             </div>
 
             <div class="col">
-                <h2 class="text-center fw-bold text-bg-danger rounded-top py-2">Lịch học</h2>
+                <h2 class="text-center fw-bold text-bg-danger rounded-top py-2">{{ __('Schedule') }}</h2>
                 <div id="calendar" class="col-lg col-12 shadow rounded-3 py-4 px-3"></div>
             </div>
         </div>

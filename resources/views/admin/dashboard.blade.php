@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Trang chủ
+    {{ __('Dashboard') }}
 @endsection
 
 @php
@@ -13,7 +13,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Trang chủ</h2>
+                <h2>{{ __('Dashboard') }}</h2>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Khoa</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Faculty') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -62,7 +62,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Lớp</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Formal Class') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -99,7 +99,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Sinh Viên</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Student') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -132,7 +132,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Giảng Viên</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Teacher') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -164,7 +164,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title mb-3 text-white">Môn Học</h5>
+                                        <h5 class="card-title mb-3 text-white">{{ __('Subject') }}</h5>
                                     </div>
 
                                     <div class="col-4">
@@ -203,7 +203,7 @@
                             style="width: 3rem; height: 3rem;" loop autoplay>
                         </dotlottie-player>
 
-                        Top 10 sinh viên xuất sắc nhất Học Viện
+                        {{ __('Top 10 most outstanding students at the Academy') }}
                     </div>
 
                     <div class="container table-responsive mt-lg-5 mt-3">
@@ -211,12 +211,12 @@
                             <thead class="table-danger">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">MSV</th>
-                                    <th scope="col">Họ và tên</th>
-                                    <th scope="col">Ngành</th>
-                                    <th scope="col">Điểm TB</th>
-                                    <th scope="col">GPA</th>
-                                    <th scope="col">Điểm chữ</th>
+                                    <th scope="col">{{ __('Student Code') }}</th>
+                                    <th scope="col">{{ __('Full Name') }}</th>
+                                    <th scope="col">{{ __('Major') }}</th>
+                                    <th scope="col">{{ __('Average Score') }}</th>
+                                    <th scope="col">{{ __('GPA') }}</th>
+                                    <th scope="col">{{ __('Rank') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -242,7 +242,7 @@
             @endcan
             @can('teacher')
                 <div class="col">
-                    <h2 class="text-center fw-bold text-bg-danger rounded-top py-2">Lịch dạy</h2>
+                    <h2 class="text-center fw-bold text-bg-danger rounded-top py-2">{{ __('Schedule') }}</h2>
                     <div id="calendar" class="col-lg col-12 shadow rounded-3 py-4 px-3"></div>
                 </div>
             @endcan
@@ -250,31 +250,31 @@
 
         <div class="row d-flex justify-content-between gap-5 bg-body-tertiary rounded-3 py-4">
             <div class="col-lg-5 col-7 mx-auto">
-                <h3 class="text-center">Biểu đồ thống kê giới tính sinh viên</h3>
+                <h3 class="text-center">{{ __('Statistical chart of student gender') }}</h3>
 
                 <canvas id="student-gender" aria-label="pie chart" role="chart"></canvas>
             </div>
 
             <div class="col-lg-5 col-7 mx-auto">
-                <h3 class="text-center">Biểu đồ thống kê giới tính giảng viên</h3>
+                <h3 class="text-center">{{ __('Statistical chart of lecturer gender') }}</h3>
 
                 <canvas id="teacher-gender" aria-label="pie chart" role="chart"></canvas>
             </div>
 
             <div class="col-lg-5 col-7 mx-auto">
-                <h3 class="text-center">Biểu đồ thống kê điểm</h3>
+                <h3 class="text-center">{{ __('Score statistics chart') }}</h3>
 
                 <canvas id="score" aria-label="pie chart" role="chart"></canvas>
             </div>
 
             <div class="col-12">
-                <h3 class="text-center">Biểu đồ thống kê số lượng ngành học mỗi khoa</h3>
+                <h3 class="text-center">{{ __('Statistical chart of the number of majors per department') }}</h3>
 
                 <canvas id="faculty" aria-label="pie chart" role="chart"></canvas>
             </div>
 
             <div class="col-12">
-                <h3 class="text-center">Biểu đồ thống kê số lượng sinh viên các ngành</h3>
+                <h3 class="text-center">{{ __('Statistical chart of number of students by major') }}</h3>
 
                 <canvas id="major" aria-label="pie chart" role="chart"></canvas>
             </div>
@@ -294,6 +294,7 @@
         const subjects = @json($subjects);
         const now = @json($now);
     </script>
+
     <script src="{{ asset('/js/chart.js') }}" type="module"></script>
     <script src="{{ asset('/js/calendar.js') }}" type="module"></script>
 @endsection

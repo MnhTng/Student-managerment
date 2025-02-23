@@ -13,7 +13,7 @@ class AdminTeacherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $teachers = Teacher::all();
 
@@ -23,7 +23,7 @@ class AdminTeacherController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         return view('admin.teacher.add');
     }
@@ -31,7 +31,7 @@ class AdminTeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -44,27 +44,27 @@ class AdminTeacherController extends Controller
                 'email' => 'required|string|email|max:100|unique:teachers,email',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'mgv.max' => 'Mã giảng viên tối đa 10 ký tự',
-                'mgv.unique' => 'Mã giảng viên đã tồn tại',
-                'name.max' => 'Tên giảng viên tối đa 100 ký tự',
-                'birthday.date' => 'Ngày sinh phải đúng định dạng ngày/tháng/năm',
-                'address.max' => 'Địa chỉ tối đa 100 ký tự',
-                'phone.max' => 'Số điện thoại tối đa 15 ký tự',
-                'phone.regex' => 'Số điện thoại phải đúng định dạng 0xxx-xxx-xxx',
-                'phone.unique' => 'Số điện thoại đã tồn tại',
-                'email.email' => 'Email phải đúng định dạng email',
-                'email.max' => 'Email tối đa 100 ký tự',
-                'email.unique' => 'Email đã tồn tại',
+                'required' => __('The :attribute field cannot be empty.'),
+                'mgv.max' => __('The :attribute field must not exceed :max characters.'),
+                'mgv.unique' => __('The :attribute field already exists on the system.'),
+                'name.max' => __('The :attribute field must not exceed :max characters.'),
+                'birthday.date' => __('The :attribute field is not in the correct format.'),
+                'address.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.regex' => __('The :attribute field is not in the correct format.'),
+                'phone.unique' => __('The :attribute field already exists on the system.'),
+                'email.email' => __('The :attribute field is not in the correct format.'),
+                'email.max' => __('The :attribute field must not exceed :max characters.'),
+                'email.unique' => __('The :attribute field already exists on the system.'),
             ],
             [
-                'mgv' => 'mã giảng viên',
-                'name' => 'tên giảng viên',
-                'birthday' => 'ngày sinh',
-                'gender' => 'giới tính',
-                'address' => 'địa chỉ',
-                'phone' => 'số điện thoại',
-                'email' => 'email',
+                'mgv' => __('Teacher Code'),
+                'name' => __('Teacher Name'),
+                'birthday' => __('Birthday'),
+                'gender' => __('Gender'),
+                'address' => __('Address'),
+                'phone' => __('Phone'),
+                'email' => __('Email'),
             ],
         );
 
@@ -79,13 +79,13 @@ class AdminTeacherController extends Controller
 
         Teacher::create($input);
 
-        return Redirect::route('teacher.index')->with('success', 'Thêm giảng viên thành công!');
+        return Redirect::route('teacher.index')->with('success', __('Teacher added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -93,7 +93,7 @@ class AdminTeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $code)
+    public function edit(string $locale = 'vi', string $code)
     {
         $teacher = Teacher::find($code);
 
@@ -103,7 +103,7 @@ class AdminTeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $code)
+    public function update(Request $request, string $locale = 'vi', string $code)
     {
         $request->validate(
             [
@@ -116,27 +116,27 @@ class AdminTeacherController extends Controller
                 'email' => 'required|string|email|max:100|unique:teachers,email,' . $request->email . ',email',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'mgv.max' => 'Mã giảng viên tối đa 10 ký tự',
-                'mgv.unique' => 'Mã giảng viên đã tồn tại',
-                'name.max' => 'Tên giảng viên tối đa 100 ký tự',
-                'birthday.date' => 'Ngày sinh phải đúng định dạng ngày/tháng/năm',
-                'address.max' => 'Địa chỉ tối đa 100 ký tự',
-                'phone.regex' => 'Số điện thoại phải đúng định dạng 0xxx-xxx-xxx',
-                'phone.max' => 'Số điện thoại tối đa 15 ký tự',
-                'phone.unique' => 'Số điện thoại đã tồn tại',
-                'email.email' => 'Email phải đúng định dạng email',
-                'email.max' => 'Email tối đa 100 ký tự',
-                'email.unique' => 'Email đã tồn tại',
+                'required' => __('The :attribute field cannot be empty.'),
+                'mgv.max' => __('The :attribute field must not exceed :max characters.'),
+                'mgv.unique' => __('The :attribute field already exists on the system.'),
+                'name.max' => __('The :attribute field must not exceed :max characters.'),
+                'birthday.date' => __('The :attribute field is not in the correct format.'),
+                'address.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.regex' => __('The :attribute field is not in the correct format.'),
+                'phone.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.unique' => __('The :attribute field already exists on the system.'),
+                'email.email' => __('The :attribute field is not in the correct format.'),
+                'email.max' => __('The :attribute field must not exceed :max characters.'),
+                'email.unique' => __('The :attribute field already exists on the system.'),
             ],
             [
-                'mgv' => 'mã giảng viên',
-                'name' => 'tên giảng viên',
-                'birthday' => 'ngày sinh',
-                'gender' => 'giới tính',
-                'address' => 'địa chỉ',
-                'phone' => 'số điện thoại',
-                'email' => 'email',
+                'mgv' => __('Teacher Code'),
+                'name' => __('Teacher Name'),
+                'birthday' => __('Birthday'),
+                'gender' => __('Gender'),
+                'address' => __('Address'),
+                'phone' => __('Phone'),
+                'email' => __('Email'),
             ],
         );
 
@@ -150,16 +150,16 @@ class AdminTeacherController extends Controller
         $teacher->email = Str::lower(Str::of($request->email)->trim());
         $teacher->save();
 
-        return Redirect::route('teacher.index')->with('success', 'Cập nhật giảng viên thành công!');
+        return Redirect::route('teacher.index')->with('success', __('The teacher has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $code)
+    public function destroy(string $locale = 'vi', string $code)
     {
         Teacher::destroy($code);
 
-        return Redirect::route('teacher.index')->with('success', 'Xóa giảng viên thành công!');
+        return Redirect::route('teacher.index')->with('success', __('Deleted teacher successfully.'));
     }
 }

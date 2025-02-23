@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật giảng viên
+    {{ __('Update Teacher') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Khoa</h2>
+                <h2>{{ __('Teacher') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('teacher.index') }}">
-                                Giảng viên
+                                {{ __('Teacher') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật giảng viên</span>
+                            <span>{{ __('Update Teacher') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật giảng viên</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Teacher') }}</h4>
 
                 <form class="needs-validation d-grid gap-3" method="POST"
                     action="{{ route('teacher.update', $teacher->mgv) }}" novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-3 col-12">
-                            <label for="mgv" class="form-label fw-bold">MGV</label>
+                            <label for="mgv" class="form-label fw-bold">{{ __('Teacher Code') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -58,7 +58,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('mgv') is-invalid @enderror @if (old('mgv') && !$errors->has('mgv')) is-valid @endif"
-                                    id="mgv" name="mgv" placeholder="MGV"
+                                    id="mgv" name="mgv" placeholder="{{ __('Teacher Code') }}"
                                     value="{{ old('mgv') ?? $teacher->mgv }}">
 
                                 @error('mgv')
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-lg-7 col-12">
-                            <label for="name" class="form-label fw-bold">Họ và tên</label>
+                            <label for="name" class="form-label fw-bold">{{ __('Full Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -87,7 +87,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('name') is-invalid @enderror @if (old('name') && !$errors->has('name')) is-valid @endif"
-                                    id="name" name="name" placeholder="Họ và tên"
+                                    id="name" name="name" placeholder="{{ __('Full Name') }}"
                                     value="{{ old('name') ?? $teacher->name }}">
 
                                 @error('name')
@@ -107,7 +107,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-4 col-12">
-                            <label for="birthday" class="form-label fw-bold">Ngày sinh</label>
+                            <label for="birthday" class="form-label fw-bold">{{ __('Birthday') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -118,7 +118,7 @@
                                 </span>
                                 <input type="date"
                                     class="form-control @error('birthday') is-invalid @enderror @if (old('birthday') && !$errors->has('birthday')) is-valid @endif"
-                                    id="birthday" name="birthday" placeholder="Ngày sinh"
+                                    id="birthday" name="birthday" placeholder="{{ __('Birthday') }}"
                                     value="{{ old('birthday') ?? $teacher->birthday }}">
 
                                 @error('birthday')
@@ -136,7 +136,7 @@
                         </div>
 
                         <div class="col-lg-4 col-12">
-                            <label for="phone" class="form-label fw-bold">Số điện thoại</label>
+                            <label for="phone" class="form-label fw-bold">{{ __('Phone') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -147,7 +147,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('phone') is-invalid @enderror @if (old('phone') && !$errors->has('phone')) is-valid @endif"
-                                    id="phone" name="phone" placeholder="SDT"
+                                    id="phone" name="phone" placeholder="{{ __('Phone') }}"
                                     value="{{ old('phone') ?? $teacher->phone }}">
 
                                 @error('phone')
@@ -165,7 +165,7 @@
                         </div>
 
                         <div class="col-lg-3 col-12">
-                            <label for="gender" class="form-label fw-bold">Giới tính</label>
+                            <label for="gender" class="form-label fw-bold">{{ __('Gender') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -177,12 +177,12 @@
                                 <select
                                     class="form-select @error('gender') is-invalid @enderror @if (old('gender') && !$errors->has('gender')) is-valid @endif"
                                     id="gender" name="gender" aria-label="Select gender">
-                                    <option class="bg-body" value="">Chọn giới tính</option>
+                                    <option class="bg-body" value="">{{ __('Select Gender') }}</option>
                                     <option class="bg-body" value="Nam"
-                                        @if ((old('gender') ?? $teacher->gender) === 'Nam') selected @endif>
-                                        Nam</option>
+                                        @if ((old('gender') ?? $teacher->gender) === 'Nam}') selected @endif>
+                                        {{ __('Male') }}</option>
                                     <option class="bg-body" value="Nữ"
-                                        @if ((old('gender') ?? $teacher->gender) === 'Nữ') selected @endif>Nữ</option>
+                                        @if ((old('gender') ?? $teacher->gender) === 'Nữ') selected @endif>{{ __('Female') }}</option>
                                 </select>
 
                                 @error('gender')
@@ -202,7 +202,7 @@
 
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="email" class="form-label fw-bold">Email</label>
+                            <label for="email" class="form-label fw-bold">{{ __('Email') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -213,7 +213,7 @@
                                 </span>
                                 <input type="email"
                                     class="form-control @error('email') is-invalid @enderror @if (old('email') && !$errors->has('email')) is-valid @endif"
-                                    id="email" name="email" placeholder="Email"
+                                    id="email" name="email" placeholder="{{ __('Email') }}"
                                     value="{{ old('email') ?? $teacher->email }}">
 
                                 @error('email')
@@ -231,7 +231,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="address" class="form-label fw-bold">Địa chỉ</label>
+                            <label for="address" class="form-label fw-bold">{{ __('Address') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -242,7 +242,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('address') is-invalid @enderror @if (old('address') && !$errors->has('address')) is-valid @endif"
-                                    id="address" name="address" placeholder="Địa chỉ"
+                                    id="address" name="address" placeholder="{{ __('Address') }}"
                                     value="{{ old('address') ?? $teacher->address }}">
 
                                 @error('address')

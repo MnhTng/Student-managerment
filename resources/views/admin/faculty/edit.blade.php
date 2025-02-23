@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật khoa
+    {{ __('Update Faculty') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Khoa</h2>
+                <h2>{{ __('Faculty') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('faculty.index') }}">
-                                Khoa
+                                {{ __('Faculty') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật khoa</span>
+                            <span>{{ __('Update Faculty') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật khoa</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Faculty') }}</h4>
 
                 <form class="needs-validation" method="POST" action="{{ route('faculty.update', $faculty->faculty_code) }}"
                     novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="faculty_code" class="form-label fw-bold">Mã khoa</label>
+                            <label for="faculty_code" class="form-label fw-bold">{{ __('Faculty Code') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -58,7 +58,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('faculty_code') is-invalid @enderror @if (old('faculty_code') && !$errors->has('faculty_code')) is-valid @endif"
-                                    id="faculty_code" name="faculty_code" placeholder="Mã khoa"
+                                    id="faculty_code" name="faculty_code" placeholder="{{ __('Faculty Code') }}"
                                     value="{{ old('faculty_code') ?? $faculty->faculty_code }}">
 
                                 @error('faculty_code')
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="faculty_name" class="form-label fw-bold">Tên khoa</label>
+                            <label for="faculty_name" class="form-label fw-bold">{{ __('Faculty Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -87,7 +87,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('faculty_name') is-invalid @enderror @if (old('faculty_name') && !$errors->has('faculty_name')) is-valid @endif"
-                                    id="faculty_name" name="faculty_name" placeholder="Tên khoa"
+                                    id="faculty_name" name="faculty_name" placeholder="{{ __('Faculty Name') }}"
                                     value="{{ old('faculty_name') ?? $faculty->faculty_name }}">
 
                                 @error('faculty_name')

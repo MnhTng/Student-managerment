@@ -13,7 +13,7 @@ class AdminFacultyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $faculties = Faculty::all();
 
@@ -23,7 +23,7 @@ class AdminFacultyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         return view('admin.faculty.add');
     }
@@ -31,7 +31,7 @@ class AdminFacultyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -39,14 +39,14 @@ class AdminFacultyController extends Controller
                 'faculty_name' => 'required|string|max:100',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'faculty_code.max' => 'Mã khoa không được vượt quá 10 ký tự.',
-                'faculty_code.unique' => 'Mã khoa đã tồn tại trên hệ thống.',
-                'faculty_name.max' => 'Tên khoa không được vượt quá 100 ký tự.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'faculty_code.max' => __('The :attribute field must not exceed :max characters.'),
+                'faculty_code.unique' => __('The :attribute field already exists on the system.'),
+                'faculty_name.max' => __('The :attribute field must not exceed :max characters.'),
             ],
             [
-                'faculty_code' => 'mã khoa',
-                'faculty_name' => 'tên khoa',
+                'faculty_code' => __('Faculty Code'),
+                'faculty_name' => __('Faculty Name'),
             ],
         );
 
@@ -56,13 +56,13 @@ class AdminFacultyController extends Controller
 
         Faculty::create($input);
 
-        return Redirect::route('faculty.index')->with("success", 'Thêm khoa thành công!');
+        return Redirect::route('faculty.index')->with("success", __('Faculty added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -70,7 +70,7 @@ class AdminFacultyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $code)
+    public function edit(string $locale = 'vi', string $code)
     {
         $faculty = Faculty::find($code);
 
@@ -80,7 +80,7 @@ class AdminFacultyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $code)
+    public function update(Request $request, string $locale = 'vi', string $code)
     {
         $request->validate(
             [
@@ -88,13 +88,13 @@ class AdminFacultyController extends Controller
                 'faculty_name' => 'required|string|max:100',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'faculty_code.max' => 'Mã khoa không được vượt quá 10 ký tự.',
-                'faculty_name.max' => 'Tên khoa không được vượt quá 100 ký tự.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'faculty_code.max' => __('The :attribute field must not exceed :max characters.'),
+                'faculty_name.max' => __('The :attribute field must not exceed :max characters.'),
             ],
             [
-                'faculty_code' => 'mã khoa',
-                'faculty_name' => 'tên khoa',
+                'faculty_code' => __('Faculty'),
+                'faculty_name' => __('Faculty Name'),
             ],
         );
 
@@ -119,16 +119,16 @@ class AdminFacultyController extends Controller
         $faculty->faculty_name = Str::ucfirst(Str::of($request->faculty_name)->trim());
         $faculty->save();
 
-        return Redirect::route('faculty.index')->with("success", 'Cập nhật khoa thành công!');
+        return Redirect::route('faculty.index')->with("success", __('The faculty has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $code)
+    public function destroy(string $locale = 'vi', string $code)
     {
         Faculty::destroy($code);
 
-        return Redirect::route('faculty.index')->with("success", 'Xóa khoa thành công!');
+        return Redirect::route('faculty.index')->with("success", __('Deleted faculty successfully.'));
     }
 }

@@ -16,7 +16,7 @@ class AdminMemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $members = User::all();
 
@@ -26,7 +26,7 @@ class AdminMemberController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         $members = User::all();
         $teachers = Teacher::all();
@@ -38,7 +38,7 @@ class AdminMemberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -49,20 +49,20 @@ class AdminMemberController extends Controller
                 'identifier' => 'required|string'
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'string' => 'Trường :attribute phải là chuỗi ký tự.',
-                'email' => 'Trường :attribute phải là địa chỉ email.',
-                'max' => 'Trường :attribute không được quá :max ký tự.',
-                'min' => 'Trường :attribute không được ít hơn :min ký tự.',
-                'unique' => 'Trường :attribute đã tồn tại.',
-                'in' => 'Trường :attribute không hợp lệ.'
+                'required' => __('The :attribute field cannot be empty.'),
+                'string' => __('The :attribute field must be a string.'),
+                'email' => __('The :attribute field is not in the correct format.'),
+                'max' => __('The :attribute field must not exceed :max characters.'),
+                'min' => __('The :attribute field must have at least :min characters.'),
+                'unique' => __('The :attribute field already exists on the system.'),
+                'in' => __('The :attribute field is not in the correct format.')
             ],
             [
-                'name' => 'tên',
-                'email' => 'email',
-                'password' => 'mật khẩu',
-                'role' => 'vai trò',
-                'identifier' => 'định danh'
+                'name' => __('Name'),
+                'email' => __('Email'),
+                'password' => __('Password'),
+                'role' => __('Role'),
+                'identifier' => __('Identify')
             ]
         );
 
@@ -73,17 +73,17 @@ class AdminMemberController extends Controller
         $member['identifier'] = $member['identifier'] != 'admin' ? Str::upper(Str::of($member['identifier'])->trim()) : $member['identifier'];
 
         if ($member['identifier'] != 'admin' && !Teacher::find($member['identifier']) && !Student::find($member['identifier']))
-            return Redirect::back()->with('error', 'Định danh không tồn tại.');
+            return Redirect::back()->with('error', __('Identify does not exist!'));
 
         User::create($member);
 
-        return Redirect::route('member.index')->with('success', 'Thêm thành viên mới thành công.');
+        return Redirect::route('member.index')->with('success', __('Member added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -91,7 +91,7 @@ class AdminMemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $locale = 'vi', string $id)
     {
         $member = User::find($id);
         $teachers = Teacher::all();
@@ -103,7 +103,7 @@ class AdminMemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $locale = 'vi', string $id)
     {
         $request->validate(
             [
@@ -114,25 +114,25 @@ class AdminMemberController extends Controller
                 'identifier' => 'required|string'
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'string' => 'Trường :attribute phải là chuỗi ký tự.',
-                'email' => 'Trường :attribute phải là địa chỉ email.',
-                'max' => 'Trường :attribute không được quá :max ký tự.',
-                'min' => 'Trường :attribute không được ít hơn :min ký tự.',
-                'unique' => 'Trường :attribute đã tồn tại.',
-                'in' => 'Trường :attribute không hợp lệ.'
+                'required' => __('The :attribute field cannot be empty.'),
+                'string' => __('The :attribute field must be a string.'),
+                'email' => __('The :attribute field is not in the correct format.'),
+                'max' => __('The :attribute field must not exceed :max characters.'),
+                'min' => __('The :attribute field must have at least :min characters.'),
+                'unique' => __('The :attribute field already exists on the system.'),
+                'in' => __('The :attribute field is not in the correct format.')
             ],
             [
-                'name' => 'tên',
-                'email' => 'email',
-                'password' => 'mật khẩu',
-                'role' => 'vai trò',
-                'identifier' => 'định danh'
+                'name' => __('Name'),
+                'email' => __('Email'),
+                'password' => __('Password'),
+                'role' => __('Role'),
+                'identifier' => __('Identify')
             ]
         );
 
         if ($request->identifier != 'admin' && !Teacher::find($request->identifier) && !Student::find($request->identifier))
-            return Redirect::back()->with('error', 'Định danh không tồn tại.');
+            return Redirect::back()->with('error', __('Identify does not exist!'));
 
         $member = User::find($id);
 
@@ -144,20 +144,20 @@ class AdminMemberController extends Controller
             $member->password = Hash::make($request->password);
         $member->save();
 
-        return Redirect::route('member.index')->with('success', 'Cập nhật thành viên thành công.');
+        return Redirect::route('member.index')->with('success', __('The member has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $locale = 'vi', string $id)
     {
         User::destroy($id);
 
-        return Redirect::route('member.index')->with('success', 'Xóa thành viên thành công.');
+        return Redirect::route('member.index')->with('success', __('Deleted member successfully.'));
     }
 
-    public function identify($role)
+    public function identify(string $locale = 'vi', $role)
     {
         if ($role === 'admin')
             return 'admin';
@@ -190,7 +190,7 @@ class AdminMemberController extends Controller
         }
     }
 
-    public function info($identifier)
+    public function info(string $locale = 'vi', $identifier)
     {
         $role = Str::of($identifier)->explode('-')->last();
         $identify = Str::of($identifier)->explode('-')->first();

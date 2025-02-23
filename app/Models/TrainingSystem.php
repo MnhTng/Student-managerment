@@ -12,6 +12,8 @@ class TrainingSystem extends Model
     protected $fillable = [
         'training_code',
         'training_name',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'training_code';

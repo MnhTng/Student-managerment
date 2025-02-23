@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Điểm
+    {{ __('Score') }}
 @endsection
 
 @php
@@ -12,7 +12,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Điểm</h2>
+                <h2>{{ __('Score') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -20,12 +20,12 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('student.dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Điểm
+                                {{ __('Score') }}
                             </li>
                         </ol>
                     </nav>
@@ -59,10 +59,10 @@
                 </select>
             </div>
         </div>
-        @if ($scores->isEmpty())
+        @if (empty($scores))
             <div class="alert alert-warning" role="alert">
-                <h4 class="alert-heading">Chưa có điểm học phần nào!</h4>
-                <p>Hãy đảm bảo bạn đã thi hết tất cả học phần.</p>
+                <h4 class="alert-heading">{{ __('No subject score yet!') }}</h4>
+                <p>{{ __('Please make sure you have taken all the exams.') }}</p>
             </div>
         @else
             @can('student')
@@ -72,12 +72,12 @@
                         <thead class="table-primary">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Mã HP</th>
-                                <th scope="col">Tên HP</th>
-                                <th scope="col">Số TC</th>
-                                <th scope="col">Điểm tổng kết</th>
-                                <th scope="col">Điểm hệ 4</th>
-                                <th scope="col">Điểm chữ</th>
+                                <th scope="col">{{ __('Subject Code') }}</th>
+                                <th scope="col">{{ __('Subject Name') }}</th>
+                                <th scope="col">{{ __('Credit') }}</th>
+                                <th scope="col">{{ __('Average Score') }}</th>
+                                <th scope="col">{{ __('GPA') }}</th>
+                                <th scope="col">{{ __('Rank') }}</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">

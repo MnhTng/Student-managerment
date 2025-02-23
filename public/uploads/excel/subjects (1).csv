@@ -1,0 +1,34 @@
+"subject_code","subject_name","credit","created_at","updated_at"
+"BAS1160","Triết học Mác - Lênin","2","2024-11-06 09:58:06","2024-11-06 09:58:06"
+"BSA1241","Toán kinh tế","3",NULL,NULL
+"BSA1309","Kinh tế lượng","3",NULL,NULL
+"BSA1328","Quản trị học","3",NULL,NULL
+"BSA1331","Quản trị nhân lực","3",NULL,NULL
+"BSA1349","Quản lý dự án","3",NULL,NULL
+"BSA1353","Kinh doanh quốc tế","3",NULL,NULL
+"ELE1305","Cơ sở đo lường điện tử","3",NULL,NULL
+"FFIA1315","Kiểm toán căn bản","3",NULL,NULL
+"FFIA1321","Nguyên lý kế toán","3",NULL,NULL
+"FFIA1326","Tài chính tiền tệ","3",NULL,NULL
+"FFIA1332","Kế toán quản trị","3",NULL,NULL
+"INT13111","Kỹ thuật đồ họa","3",NULL,NULL
+"INT1313","Cơ sở dữ liệu","3",NULL,NULL
+"INT1319","Hệ điều hành","3",NULL,NULL
+"INT1336","Mạng máy tính","3",NULL,NULL
+"INT1342","Toán kỹ thuật","2",NULL,NULL
+"INT14106","Toán cao cấp","2",NULL,NULL
+"INT1434","Toán rời rạc","3",NULL,NULL
+"INT1449","Kinh tế vi mô","2",NULL,NULL
+"INT1482","An toàn mạng","3",NULL,NULL
+"INT1487","Đại số","3",NULL,NULL
+"INT1488","Tiếng Anh","4",NULL,NULL
+"INT1489","Tin học cơ sở","2",NULL,NULL
+"INT1490","Kỹ năng mềm","1",NULL,NULL
+"MUL13148","Bản quyền số","3",NULL,NULL
+"MUL14130","Kiến trúc máy tính","2",NULL,NULL
+"MUL1415","Kỹ xảo đa phương tiện","3",NULL,NULL
+"MUL1423","Kịch bản đa phương tiện","3",NULL,NULL
+"MUL1446","Kỹ thuật số","2",NULL,NULL
+"SKD1108","Điện tử số","2",NULL,NULL
+"TEL1341","Công nghệ phần mềm","2",NULL,NULL
+"TEL1344","Lý thuyết truyền tin","2",NULL,NULL

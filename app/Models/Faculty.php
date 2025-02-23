@@ -12,6 +12,8 @@ class Faculty extends Model
     protected $fillable = [
         'faculty_code',
         'faculty_name',
+        'created_at',
+        'updated_at',
     ];
 
     //! Đặt 'faculty_code' là khóa chính

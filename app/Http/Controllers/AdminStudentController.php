@@ -65,7 +65,7 @@ class AdminStudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $students = Student::all();
 
@@ -75,7 +75,7 @@ class AdminStudentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         $ethnicity = $this->ethnicity;
         $training_systems = TrainingSystem::all();
@@ -89,7 +89,7 @@ class AdminStudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -109,39 +109,39 @@ class AdminStudentController extends Controller
                 'academic_year' => 'required|string|regex:/^[0-9]{4}-[0-9]{4}$/',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'msv.max' => 'Mã sinh viên tối đa 10 ký tự',
-                'msv.regex' => 'Mã sinh viên phải đúng định dạng B00DCaa000',
-                'msv.unique' => 'Mã sinh viên đã tồn tại',
-                'name.max' => 'Tên sinh viên tối đa 100 ký tự',
-                'birthday.date' => 'Ngày sinh phải đúng định dạng ngày/tháng/năm',
-                'address.max' => 'Địa chỉ tối đa 100 ký tự',
-                'phone.max' => 'Số điện thoại tối đa 15 ký tự',
-                'phone.regex' => 'Số điện thoại phải đúng định dạng 0xxx-xxx-xxx',
-                'phone.unique' => 'Số điện thoại đã tồn tại',
-                'email.email' => 'Email phải đúng định dạng email',
-                'email.max' => 'Email tối đa 100 ký tự',
-                'email.unique' => 'Email đã tồn tại',
-                'cccd.max' => 'CCCD tối đa 12 ký tự',
-                'cccd.regex' => 'CCCD phải đúng định dạng 12 số',
-                'cccd.unique' => 'CCCD đã tồn tại',
-                'academic_year.regex' => 'Niên khóa phải đúng định dạng 2019-2020',
+                'required' => __('The :attribute field cannot be empty.'),
+                'msv.max' => __('The :attribute field must not exceed :max characters.'),
+                'msv.regex' => __('The :attribute field is not in the correct format.'),
+                'msv.unique' => __('The :attribute field already exists on the system.'),
+                'name.max' => __('The :attribute field must not exceed :max characters.'),
+                'birthday.date' => __('The :attribute field is not in the correct format.'),
+                'address.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.regex' => __('The :attribute field is not in the correct format.'),
+                'phone.unique' => __('The :attribute field already exists on the system.'),
+                'email.email' => __('The :attribute field is not in the correct format.'),
+                'email.max' => __('The :attribute field must not exceed :max characters.'),
+                'email.unique' => __('The :attribute field already exists on the system.'),
+                'cccd.max' => __('The :attribute field must not exceed :max characters.'),
+                'cccd.regex' => __('The :attribute field is not in the correct format.'),
+                'cccd.unique' => __('The :attribute field already exists on the system.'),
+                'academic_year.regex' => __('The :attribute field is not in the correct format.'),
             ],
             [
-                'msv' => 'mã sinh viên',
-                'name' => 'tên',
-                'birthday' => 'ngày sinh',
-                'gender' => 'giới tính',
-                'address' => 'địa chỉ',
-                'phone' => 'số điện thoại',
-                'email' => 'email',
-                'cccd' => 'CCCD',
-                'ethnicity' => 'dân tộc',
-                'training_system' => 'hệ đào tạo',
-                'faculty' => 'khoa',
-                'major' => 'ngành',
-                'formal_class' => 'lớp đào tạo',
-                'academic_year' => 'niên khóa',
+                'msv' => __('Student Code'),
+                'name' => __('Name'),
+                'birthday' => __('Birthday'),
+                'gender' => __('Gender'),
+                'address' => __('Address'),
+                'phone' => __('Phone'),
+                'email' => __('Email'),
+                'cccd' => __('ID Card'),
+                'ethnicity' => __('Ethnicity'),
+                'training_system' => __('Training System'),
+                'faculty' => __('Faculty'),
+                'major' => __('Major'),
+                'formal_class' => __('Formal Class'),
+                'academic_year' => __('School Year'),
             ]
         );
 
@@ -163,13 +163,13 @@ class AdminStudentController extends Controller
 
         Student::create($input);
 
-        return Redirect::route('student.index')->with('success', 'Thêm sinh viên thành công!');
+        return Redirect::route('student.index')->with('success', __('Student added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -177,7 +177,7 @@ class AdminStudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $code)
+    public function edit(string $locale = 'vi', string $code)
     {
         $student = Student::find($code);
         $ethnicity = $this->ethnicity;
@@ -192,7 +192,7 @@ class AdminStudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $code)
+    public function update(Request $request, string $locale = 'vi', string $code)
     {
         $request->validate(
             [
@@ -212,39 +212,39 @@ class AdminStudentController extends Controller
                 'academic_year' => 'required|string|regex:/^[0-9]{4}-[0-9]{4}$/',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'msv.max' => 'Mã sinh viên tối đa 10 ký tự',
-                'msv.regex' => 'Mã sinh viên phải đúng định dạng B00DCaa000',
-                'msv.unique' => 'Mã sinh viên đã tồn tại',
-                'name.max' => 'Tên sinh viên tối đa 100 ký tự',
-                'birthday.date' => 'Ngày sinh phải đúng định dạng ngày/tháng/năm',
-                'address.max' => 'Địa chỉ tối đa 100 ký tự',
-                'phone.max' => 'Số điện thoại tối đa 15 ký tự',
-                'phone.regex' => 'Số điện thoại phải đúng định dạng 0xxx-xxx-xxx',
-                'phone.unique' => 'Số điện thoại đã tồn tại',
-                'email.email' => 'Email phải đúng định dạng email',
-                'email.max' => 'Email tối đa 100 ký tự',
-                'email.unique' => 'Email đã tồn tại',
-                'cccd.max' => 'CCCD tối đa 12 ký tự',
-                'cccd.regex' => 'CCCD phải đúng định dạng 12 số',
-                'cccd.unique' => 'CCCD đã tồn tại',
-                'academic_year.regex' => 'Niên khóa phải đúng định dạng 2019-2020',
+                'required' => __('The :attribute field cannot be empty.'),
+                'msv.max' => __('The :attribute field must not exceed :max characters.'),
+                'msv.regex' => __('The :attribute field is not in the correct format.'),
+                'msv.unique' => __('The :attribute field already exists on the system.'),
+                'name.max' => __('The :attribute field must not exceed :max characters.'),
+                'birthday.date' => __('The :attribute field is not in the correct format.'),
+                'address.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.max' => __('The :attribute field must not exceed :max characters.'),
+                'phone.regex' => __('The :attribute field is not in the correct format.'),
+                'phone.unique' => __('The :attribute field already exists on the system.'),
+                'email.email' => __('The :attribute field is not in the correct format.'),
+                'email.max' => __('The :attribute field must not exceed :max characters.'),
+                'email.unique' => __('The :attribute field already exists on the system.'),
+                'cccd.max' => __('The :attribute field must not exceed :max characters.'),
+                'cccd.regex' => __('The :attribute field is not in the correct format.'),
+                'cccd.unique' => __('The :attribute field already exists on the system.'),
+                'academic_year.regex' => __('The :attribute field is not in the correct format.'),
             ],
             [
-                'msv' => 'mã sinh viên',
-                'name' => 'tên',
-                'birthday' => 'ngày sinh',
-                'gender' => 'giới tính',
-                'address' => 'địa chỉ',
-                'phone' => 'số điện thoại',
-                'email' => 'email',
-                'cccd' => 'CCCD',
-                'ethnicity' => 'dân tộc',
-                'training_system' => 'hệ đào tạo',
-                'faculty' => 'khoa',
-                'major' => 'ngành',
-                'formal_class' => 'lớp đào tạo',
-                'academic_year' => 'niên khóa',
+                'msv' => __('Student Code'),
+                'name' => __('Name'),
+                'birthday' => __('Birthday'),
+                'gender' => __('Gender'),
+                'address' => __('Address'),
+                'phone' => __('Phone'),
+                'email' => __('Email'),
+                'cccd' => __('ID Card'),
+                'ethnicity' => __('Ethnicity'),
+                'training_system' => __('Training System'),
+                'faculty' => __('Faculty'),
+                'major' => __('Major'),
+                'formal_class' => __('Formal Class'),
+                'academic_year' => __('School Year'),
             ]
         );
 
@@ -265,27 +265,27 @@ class AdminStudentController extends Controller
         $student->academic_year = $request->academic_year;
         $student->save();
 
-        return Redirect::route('student.index')->with('success', 'Cập nhật sinh viên thành công.');
+        return Redirect::route('student.index')->with('success', __('The student has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $code)
+    public function destroy(string $locale = 'vi', string $code)
     {
         Student::destroy($code);
 
-        return Redirect::route('student.index')->with('success', 'Xóa sinh viên thành công.');
+        return Redirect::route('student.index')->with('success', __('Deleted student successfully.'));
     }
 
-    public function getMajorByFaculty(string $faculty)
+    public function getMajorByFaculty(string $locale = 'vi', string $faculty)
     {
         $majors = Major::where('faculty_code', $faculty)->get();
 
         return response()->json($majors);
     }
 
-    public function getFormalClassByMajor(string $major)
+    public function getFormalClassByMajor(string $locale = 'vi', string $major)
     {
         $formal_classes = FormalClass::where('major_code', $major)->get();
 

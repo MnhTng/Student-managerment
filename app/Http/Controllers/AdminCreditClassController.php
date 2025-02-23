@@ -17,7 +17,7 @@ class AdminCreditClassController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $distinct_class = CreditClass::select('room', 'mgv', 'subject_code', 'school_year', 'start_time', 'end_time')
             ->distinct()
@@ -40,7 +40,7 @@ class AdminCreditClassController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         $school_years = SchoolYear::all();
         $teachers = Teacher::all()->sortBy('name');
@@ -53,7 +53,7 @@ class AdminCreditClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -66,33 +66,33 @@ class AdminCreditClassController extends Controller
                 'end_time' => 'required',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'min' => 'Trường :attribute phải có ít nhất :min ký tự.',
-                'array' => 'Trường :attribute phải là một mảng.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'min' => __('The :attribute field must have at least :min characters.'),
+                'array' => __('The :attribute field must be an array.'),
             ],
             [
-                'room' => 'phòng học',
-                'teacher' => 'giảng viên',
-                'students' => 'học sinh',
-                'school_year' => 'năm học',
-                'subject' => 'môn học',
-                'start_time' => 'thời gian bắt đầu',
-                'end_time' => 'thời gian kết thúc',
+                'room' => __('Classroom'),
+                'teacher' => __('Teacher'),
+                'students' => __('Student'),
+                'school_year' => __('School Year'),
+                'subject' => __('Subject'),
+                'start_time' => __('Start Time'),
+                'end_time' => __('End Time'),
             ]
         );
 
         if (empty($request->students[0]['student']))
-            return Redirect::back()->with('error', 'Vui lòng chọn sinh viên.');
+            return Redirect::back()->with('error', __('Please choose a student.'));
 
         $students_msv = [];
         foreach ($request->students as $student) {
             $parts = Str::of($student['student'])->explode('-')->count();
             if ($parts == 1)
-                return Redirect::back()->with('error', 'Vui lòng nhập đầy đủ Họ tên - Mã sinh viên.');
+                return Redirect::back()->with('error', __('Please enter full name and student code.'));
 
             $msv = Str::of($student['student'])->explode('-')[1];
             if (!(Student::find($msv)))
-                return Redirect::back()->with('error', 'Sinh viên không tồn tại.');
+                return Redirect::back()->with('error', __('Student does not exist!'));
 
             if (!in_array(Str::upper($msv), $students_msv))
                 $students_msv[] = Str::upper($msv);
@@ -106,7 +106,7 @@ class AdminCreditClassController extends Controller
             ->where('end_time', $request->end_time)
             ->exists();
         if ($checkExists)
-            return Redirect::back()->with('error', 'Lớp tín chỉ đã tồn tại.');
+            return Redirect::back()->with('error', __('Credit classes already exist!'));
 
         foreach ($students_msv as $msv) {
             $input = [
@@ -122,13 +122,13 @@ class AdminCreditClassController extends Controller
             CreditClass::create($input);
         }
 
-        return Redirect::route('credit-class.index')->with('success', 'Thêm lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.index')->with('success', __('Credit class added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -136,7 +136,7 @@ class AdminCreditClassController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $class_id)
+    public function edit(string $locale = 'vi', string $class_id)
     {
         $classroom = CreditClass::find($class_id);
         $school_years = SchoolYear::all();
@@ -150,7 +150,7 @@ class AdminCreditClassController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $class_id)
+    public function update(Request $request, string $locale = 'vi', string $class_id)
     {
         $request->validate(
             [
@@ -162,17 +162,17 @@ class AdminCreditClassController extends Controller
                 'end_time' => 'required',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'min' => 'Trường :attribute phải có ít nhất :min ký tự.',
-                'array' => 'Trường :attribute phải là một mảng.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'min' => __('The :attribute field must have at least :min characters.'),
+                'array' => __('The :attribute field must be an array.'),
             ],
             [
-                'room' => 'phòng học',
-                'teacher' => 'giảng viên',
-                'school_year' => 'năm học',
-                'subject' => 'môn học',
-                'start_time' => 'thời gian bắt đầu',
-                'end_time' => 'thời gian kết thúc',
+                'room' => __('Classroom'),
+                'teacher' => __('Teacher'),
+                'school_year' => __('School Year'),
+                'subject' => __('Subject'),
+                'start_time' => __('Start Time'),
+                'end_time' => __('End Time'),
             ]
         );
 
@@ -184,7 +184,7 @@ class AdminCreditClassController extends Controller
             ->where('end_time', $request->end_time)
             ->exists();
         if ($checkExists)
-            return Redirect::back()->with('error', 'Lớp tín chỉ đã tồn tại.');
+            return Redirect::back()->with('error', __('Credit classes already exist!'));
 
         $classroom = CreditClass::find($class_id);
         $credit_classes = CreditClass::where('room', $classroom->room)
@@ -205,13 +205,13 @@ class AdminCreditClassController extends Controller
             $credit_class->save();
         }
 
-        return Redirect::route('credit-class.index')->with('success', 'Cập nhật lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.index')->with('success', __('The credit class has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $class_id)
+    public function destroy(string $locale = 'vi', string $class_id)
     {
         $credit_class = CreditClass::find($class_id);
         $classroom = CreditClass::where('room', $credit_class->room)
@@ -226,10 +226,10 @@ class AdminCreditClassController extends Controller
             $class->delete();
         }
 
-        return Redirect::route('credit-class.index')->with('success', 'Xóa lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.index')->with('success', __('Deleted credit class successfully.'));
     }
 
-    public function list(string $class_id)
+    public function list(string $locale = 'vi', string $class_id)
     {
         $credit_class = CreditClass::find($class_id);
         $classroom = CreditClass::where('room', $credit_class->room)
@@ -243,7 +243,7 @@ class AdminCreditClassController extends Controller
         return view('admin.credit-class.students.list', compact('credit_class', 'classroom'));
     }
 
-    public function createStudent(string $class_id)
+    public function createStudent(string $locale = 'vi', string $class_id)
     {
         $classroom = CreditClass::find($class_id);
         $students = Student::all();
@@ -251,17 +251,17 @@ class AdminCreditClassController extends Controller
         return view('admin.credit-class.students.add', compact('classroom', 'students'));
     }
 
-    public function storeStudent(Request $request, string $class_id)
+    public function storeStudent(Request $request, string $locale = 'vi', string $class_id)
     {
         $parts = Str::of($request->student)->explode('-')->count();
 
         if ($parts == 1)
-            return Redirect::back()->with('error', 'Vui lòng nhập đầy đủ Họ tên - Mã sinh viên.');
+            return Redirect::back()->with('error', __('Please enter full name and student code.'));
 
         $student_id = Str::of($request->student)->explode('-')[1];
         $student = Student::find($student_id);
         if (!$student)
-            return Redirect::back()->with('error', 'Sinh viên không tồn tại.');
+            return Redirect::back()->with('error', __('Student does not exist!'));
 
         $classroom = CreditClass::find($class_id);
 
@@ -274,7 +274,7 @@ class AdminCreditClassController extends Controller
             ->where('msv', $student_id)
             ->exists();
         if ($credit_class)
-            return Redirect::back()->with('error', 'Sinh viên đã tồn tại trong lớp tín chỉ.');
+            return Redirect::back()->with('error', __('Students already exist.'));
 
         $newStudent = $classroom;
         $newStudent->msv = $student_id;
@@ -284,10 +284,10 @@ class AdminCreditClassController extends Controller
 
         CreditClass::create($newStudent->toArray());
 
-        return Redirect::route('credit-class.list', $class_id)->with('success', 'Thêm sinh viên vào lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.list', [$class_id])->with('success', __('Student added to credit class successfully.'));
     }
 
-    public function editStudent(string $class_id)
+    public function editStudent(string $locale = 'vi', string $class_id)
     {
         $classroom = CreditClass::find($class_id);
         $students = Student::all();
@@ -295,17 +295,17 @@ class AdminCreditClassController extends Controller
         return view('admin.credit-class.students.edit', compact('classroom', 'students'));
     }
 
-    public function updateStudent(Request $request, string $class_id)
+    public function updateStudent(Request $request, string $locale = 'vi', string $class_id)
     {
         $parts = Str::of($request->student)->explode('-')->count();
 
         if ($parts == 1)
-            return Redirect::back()->with('error', 'Vui lòng nhập đầy đủ Họ tên - Mã sinh viên.');
+            return Redirect::back()->with('error', __('Please enter full name and student code.'));
 
         $student_id = Str::of($request->student)->explode('-')[1];
         $student = Student::find($student_id);
         if (!$student)
-            return Redirect::back()->with('error', 'Sinh viên không tồn tại.');
+            return Redirect::back()->with('error', __('Student does not exist!'));
 
         $classroom = CreditClass::find($class_id);
 
@@ -318,15 +318,15 @@ class AdminCreditClassController extends Controller
             ->where('msv', $student_id)
             ->exists();
         if ($credit_class)
-            return Redirect::back()->with('error', 'Sinh viên đã tồn tại trong lớp tín chỉ.');
+            return Redirect::back()->with('error', __('Students already exist.'));
 
         $classroom->msv = $student_id;
         $classroom->save();
 
-        return Redirect::route('credit-class.list', $class_id)->with('success', 'Thêm sinh viên vào lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.list', [$class_id])->with('success', __('Student added to credit class successfully.'));
     }
 
-    public function destroyStudent(string $class_id)
+    public function destroyStudent(string $locale = 'vi', string $class_id)
     {
         $credit_class = CreditClass::find($class_id);
         $numberStudent = CreditClass::where('room', $credit_class->room)
@@ -338,7 +338,7 @@ class AdminCreditClassController extends Controller
             ->count();
 
         if ($numberStudent == 1)
-            return Redirect::back()->with('error', 'Không thể xóa sinh viên cuối cùng trong lớp tín chỉ.');
+            return Redirect::back()->with('error', __('The last student in a credit class cannot be deleted.'));
 
         $classroom = CreditClass::where('id', '!=', $class_id)
             ->where('room', $credit_class->room)
@@ -350,6 +350,6 @@ class AdminCreditClassController extends Controller
             ->first();
         CreditClass::destroy($class_id);
 
-        return Redirect::route('credit-class.list', $classroom->id)->with('success', 'Xóa sinh viên khỏi lớp tín chỉ thành công.');
+        return Redirect::route('credit-class.list', [$classroom->id])->with('success', __('Successfully removed student from credit class.'));
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Thêm thành viên lớp
+    {{ __('Add Class Member') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Thêm thành viên lớp</h2>
+                <h2>{{ __('Add Class Member') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -21,26 +21,26 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('credit-class.index') }}">
-                                Lớp tín chỉ
+                                {{ __('Credit Class') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('credit-class.list', $classroom->id) }}">
-                                Thành viên lớp
+                                {{ __('Class Member') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Thêm thành viên lớp</span>
+                            <span>{{ __('Add Class Member') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -50,7 +50,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Thêm thành viên lớp</h4>
+                <h4 class="text-danger mb-3">{{ __('Add Class Member') }}</h4>
 
                 <form class="needs-validation d-grid gap-3" method="POST"
                     action="{{ route('credit-class.store.student', $classroom->id) }}" novalidate>
@@ -58,7 +58,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="room" class="form-label fw-bold">Phòng</label>
+                            <label for="room" class="form-label fw-bold">{{ __('Classroom') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="school_year" class="form-label fw-bold">Năm học</label>
+                            <label for="school_year" class="form-label fw-bold">{{ __('School Year') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -94,7 +94,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-12">
-                            <label for="teacher" class="form-label fw-bold">Giảng viên</label>
+                            <label for="teacher" class="form-label fw-bold">{{ __('Teacher') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="student" class="form-label fw-bold">Sinh viên</label>
+                            <label for="student" class="form-label fw-bold">{{ __('Student') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -119,7 +119,8 @@
                                     </svg>
                                 </span>
                                 <input type="text" class="form-control" id="student" name="student" list="students"
-                                    placeholder="Họ tên - Mã sinh viên" value="{{ old('student') }}">
+                                    placeholder="{{ __('Full Name') }} - {{ __('Student Code') }}"
+                                    value="{{ old('student') }}">
                                 <datalist id="students">
                                     @foreach ($students as $student)
                                         <option value="{{ $student->name . '-' . $student->msv }}">
@@ -143,7 +144,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="subject" class="form-label fw-bold">Môn học</label>
+                            <label for="subject" class="form-label fw-bold">{{ __('Subject') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -164,7 +165,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="start_time" class="form-label fw-bold">Thời gian bắt đầu</label>
+                            <label for="start_time" class="form-label fw-bold">{{ __('Start Time') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -179,7 +180,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="end_time" class="form-label fw-bold">Thời gian kết thúc</label>
+                            <label for="end_time" class="form-label fw-bold">{{ __('End Time') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"

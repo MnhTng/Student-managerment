@@ -1,10 +1,25 @@
+// get current locale
+const currentLocale = document.documentElement.lang;
+
+let male = 'Nam';
+let female = 'Nữ';
+let majorNumber = 'Số lượng ngành';
+let studentNumber = 'Số sinh viên';
+
+if (currentLocale === 'en') {
+    male = 'Male';
+    female = 'Female';
+    majorNumber = 'Number of majors';
+    studentNumber = 'Number of students';
+}
+
 //! Student gender
 const studentGender = document.getElementById('student-gender').getContext('2d');
 
 new Chart(studentGender, {
     type: 'pie',
     data: {
-        labels: ['Nam', 'Nữ'],
+        labels: [male, female],
         datasets: [{
             data: [
                 chart.maleStudent,
@@ -36,7 +51,7 @@ const teacherGender = document.getElementById('teacher-gender').getContext('2d')
 new Chart(teacherGender, {
     type: 'pie',
     data: {
-        labels: ['Nam', 'Nữ'],
+        labels: [male, female],
         datasets: [{
             data: [
                 chart.maleTeacher,
@@ -126,7 +141,7 @@ new Chart(faculty, {
         labels: facultyName,
         datasets: [
             {
-                label: 'Số lượng ngành',
+                label: majorNumber,
                 data: majorNum,
                 borderWidth: 1,
                 borderColor: [
@@ -192,7 +207,7 @@ new Chart(major, {
         labels: majorName,
         datasets: [
             {
-                label: 'Số sinh viên',
+                label: studentNumber,
                 data: studentNum,
                 borderWidth: 1,
                 borderColor: [

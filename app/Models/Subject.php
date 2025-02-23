@@ -13,6 +13,8 @@ class Subject extends Model
         'subject_code',
         'subject_name',
         'credit',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'subject_code';

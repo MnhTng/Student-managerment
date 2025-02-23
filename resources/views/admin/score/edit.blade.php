@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật điểm
+    {{ __('Update Score') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Cập nhật điểm</h2>
+                <h2>{{ __('Update Score') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,26 +17,26 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none "
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none "
                                 href="{{ route('teacher.credit-class') }}">
-                                Lớp tín chỉ
+                                {{ __('Credit Class') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none "
                                 href="{{ route('score.show', $credit_class_id) }}">
-                                Điểm
+                                {{ __('Score') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật điểm</span>
+                            <span>{{ __('Update Score') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -46,15 +46,15 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật điểm</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Score') }}</h4>
 
                 <form class="needs-validation" method="POST"
-                    action="{{ route('score.update', [$score->id, $credit_class_id]) }}" novalidate>
+                    action="{{ route('score.update', $score->id, $credit_class_id) }}" novalidate>
                     @csrf
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="student" class="form-label fw-bold">Sinh viên</label>
+                            <label for="student" class="form-label fw-bold">{{ __('Student') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="school_year" class="form-label fw-bold">Năm học</label>
+                            <label for="school_year" class="form-label fw-bold">{{ __('School Year') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -90,7 +90,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-8 col-12">
-                            <label for="subject" class="form-label fw-bold">Môn học</label>
+                            <label for="subject" class="form-label fw-bold">{{ __('Subject') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="col-lg-3 col-12">
-                            <label for="score" class="form-label fw-bold">Điểm</label>
+                            <label for="score" class="form-label fw-bold">{{ __('Score') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -116,7 +116,7 @@
                                 </span>
                                 <input type="number" min="0" max="10" step="0.05"
                                     class="form-control @error('score') is-invalid @enderror @if (old('score') && !$errors->has('score')) is-valid @endif"
-                                    id="score" name="score" placeholder="Điểm"
+                                    id="score" name="score" placeholder="{{ __('Score') }}"
                                     value="{{ old('score') ?? $score->score }}">
 
                                 @error('score')

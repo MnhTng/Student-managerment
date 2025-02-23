@@ -1,0 +1,12 @@
+"major_code","major_name","faculty_code","created_at","updated_at"
+"ATTT","An toàn thông tin","CNTT",NULL,NULL
+"BC","Báo chí","DPT",NULL,"2024-11-05 01:09:20"
+"CNDPT","Công nghệ đa phương tiện","DPT",NULL,"2024-11-05 01:09:20"
+"CNTT","Công nghệ thông tin","CNTT",NULL,NULL
+"DT","Công nghệ kỹ thuật điện, điện tử","KTDT",NULL,"2024-11-03 22:17:33"
+"FINTECH","FINTECH","TCKT",NULL,NULL
+"KT","Kế toán","TCKT",NULL,NULL
+"MR","Marketing","TCKT",NULL,NULL
+"QTKD","Quản trị kinh doanh","QTKD",NULL,NULL
+"TTDPT","Truyền thông đa phương tiện","DPT",NULL,"2024-11-05 01:09:20"
+"VT","Kỹ thuật điện tử viễn thông","VT",NULL,NULL

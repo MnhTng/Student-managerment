@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Thành viên
+    {{ __('Member') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Thành viên</h2>
+                <h2>{{ __('Member') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -20,12 +20,12 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Thành viên
+                                {{ __('Member') }}
                             </li>
                         </ol>
                     </nav>
@@ -41,7 +41,7 @@
                             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
 
-                    <span>Thêm thành viên</span>
+                    <span>{{ __('Add Member') }}</span>
                 </a>
             </div>
         </div>
@@ -51,11 +51,11 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Thành viên</th>
-                        <th scope="col">Định danh</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Vai trò</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col">{{ __('Member') }}</th>
+                        <th scope="col">{{ __('Identify') }}</th>
+                        <th scope="col">{{ __('Email') }}</th>
+                        <th scope="col">{{ __('Role') }}</th>
+                        <th scope="col">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">

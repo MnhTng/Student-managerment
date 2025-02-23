@@ -17,6 +17,8 @@ class Teacher extends Model
         'address',
         'phone',
         'email',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'mgv';

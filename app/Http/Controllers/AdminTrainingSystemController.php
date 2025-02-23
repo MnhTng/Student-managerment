@@ -13,7 +13,7 @@ class AdminTrainingSystemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $training_systems = TrainingSystem::all();
 
@@ -23,7 +23,7 @@ class AdminTrainingSystemController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         return view('admin.training-system.add');
     }
@@ -31,7 +31,7 @@ class AdminTrainingSystemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -39,14 +39,14 @@ class AdminTrainingSystemController extends Controller
                 'training_name' => 'required|string|max:50',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'training_code.max' => 'Mã đào tạo không được vượt quá 10 ký tự.',
-                'training_code.unique' => 'Mã đào tạo đã tồn tại trên hệ thống.',
-                'training_name.max' => 'Tên hệ đào tạo không được vượt quá 50 ký tự.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'training_code.max' => __('The :attribute field must not exceed :max characters.'),
+                'training_code.unique' => __('The :attribute field already exists on the system.'),
+                'training_name.max' => __('The :attribute field must not exceed :max characters.'),
             ],
             [
-                'training_code' => 'mã đào tạo',
-                'training_name' => 'tên hệ đào tạo',
+                'training_code' => __('Training System Code'),
+                'training_name' => __('Training System Name'),
             ],
         );
 
@@ -56,13 +56,13 @@ class AdminTrainingSystemController extends Controller
 
         TrainingSystem::create($input);
 
-        return Redirect::route('training-system.index')->with("success", 'Thêm hệ đào tạo thành công!');
+        return Redirect::route('training-system.index')->with("success", __('Training system added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -70,7 +70,7 @@ class AdminTrainingSystemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $code)
+    public function edit(string $locale = 'vi', string $code)
     {
         $training_system = TrainingSystem::find($code);
 
@@ -80,7 +80,7 @@ class AdminTrainingSystemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $code)
+    public function update(Request $request, string $locale = 'vi', string $code)
     {
         $request->validate(
             [
@@ -88,13 +88,13 @@ class AdminTrainingSystemController extends Controller
                 'training_name' => 'required|string|max:50',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'training_code.max' => 'Mã đào tạo không được vượt quá 10 ký tự.',
-                'training_name.max' => 'Tên hệ đào tạo không được vượt quá 50 ký tự.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'training_code.max' => __('The :attribute field must not exceed :max characters.'),
+                'training_name.max' => __('The :attribute field must not exceed :max characters.'),
             ],
             [
-                'training_code' => 'mã đào tạo',
-                'training_name' => 'tên hệ đào tạo',
+                'training_code' => __('Training System Code'),
+                'training_name' => __('Training System Name'),
             ],
         );
 
@@ -103,16 +103,16 @@ class AdminTrainingSystemController extends Controller
         $faculty->training_name = Str::ucfirst(Str::of($request->training_name)->trim());
         $faculty->save();
 
-        return Redirect::route('training-system.index')->with("success", 'Cập nhật hệ đào tạo thành công!');
+        return Redirect::route('training-system.index')->with("success", __('The training system has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $code)
+    public function destroy(string $locale = 'vi', string $code)
     {
         TrainingSystem::destroy($code);
 
-        return Redirect::route('training-system.index')->with("success", 'Xóa hệ đào tạo thành công!');
+        return Redirect::route('training-system.index')->with("success", __('Deleted training system successfully.'));
     }
 }

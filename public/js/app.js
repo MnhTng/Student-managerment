@@ -78,3 +78,35 @@ function search() {
         element.innerHTML = highlightedHTML; // Cập nhật nội dung với phần đã làm nổi bật
     });
 }
+
+//! Toggle the active theme
+let light = document.getElementById('light-theme');
+let dark = document.getElementById('dark-theme');
+let currentTheme;
+
+window.addEventListener('DOMContentLoaded', () => {
+    currentTheme = document.documentElement.getAttribute('data-bs-theme');
+
+    if (currentTheme === 'light') {
+        dark.classList.remove('d-none');
+        dark.classList.add('d-flex');
+    } else {
+        light.classList.remove('d-none');
+        light.classList.add('d-flex');
+    }
+});
+
+
+light.addEventListener('click', () => {
+    light.classList.add('d-none');
+    light.classList.remove('d-flex');
+    dark.classList.add('d-flex');
+    dark.classList.remove('d-none');
+});
+
+dark.addEventListener('click', () => {
+    dark.classList.add('d-none');
+    dark.classList.remove('d-flex');
+    light.classList.add('d-flex');
+    light.classList.remove('d-none');
+});

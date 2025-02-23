@@ -14,7 +14,7 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, string $locale = 'vi'): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
@@ -24,7 +24,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, string $locale = 'vi'): RedirectResponse
     {
         $request->user()->fill($request->validated());
 
@@ -40,7 +40,7 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request, string $locale = 'vi'): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],

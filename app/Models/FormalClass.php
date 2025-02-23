@@ -13,6 +13,8 @@ class FormalClass extends Model
         'class_code',
         'mgv',
         'major_code',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'class_code';

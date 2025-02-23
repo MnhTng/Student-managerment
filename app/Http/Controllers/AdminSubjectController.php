@@ -13,7 +13,7 @@ class AdminSubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $subjects = Subject::all();
 
@@ -23,7 +23,7 @@ class AdminSubjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         return view('admin.subject.add');
     }
@@ -31,7 +31,7 @@ class AdminSubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -40,14 +40,14 @@ class AdminSubjectController extends Controller
                 'credit' => 'required',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'subject_code.regex' => 'Mã môn học không đúng định dạng.',
-                'subject_code.unique' => 'Môn học đã tồn tại trên hệ thống.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'subject_code.regex' => __('The :attribute field is not in the correct format.'),
+                'subject_code.unique' => __('The :attribute field already exists on the system.'),
             ],
             [
-                'subject_code' => 'mã môn học',
-                'subject_name' => 'tên môn học',
-                'credit' => 'số tín chỉ',
+                'subject_code' => __('Subject Code'),
+                'subject_name' => __('Subject Name'),
+                'credit' => __('Credit'),
             ]
         );
 
@@ -57,13 +57,13 @@ class AdminSubjectController extends Controller
 
         Subject::create($input);
 
-        return Redirect::route('subject.index')->with("success", 'Thêm môn học thành công!');
+        return Redirect::route('subject.index')->with("success", __('Subject added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -71,7 +71,7 @@ class AdminSubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $code)
+    public function edit(string $locale = 'vi', string $code)
     {
         $subject = Subject::find($code);
 
@@ -81,7 +81,7 @@ class AdminSubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $code)
+    public function update(Request $request, string $locale = 'vi', string $code)
     {
         $request->validate(
             [
@@ -90,14 +90,14 @@ class AdminSubjectController extends Controller
                 'credit' => 'required',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'subject_code.regex' => 'Mã môn học không đúng định dạng.',
-                'subject_code.unique' => 'Môn học đã tồn tại trên hệ thống.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'subject_code.regex' => __('The :attribute field is not in the correct format.'),
+                'subject_code.unique' => __('The :attribute field already exists on the system.'),
             ],
             [
-                'subject_code' => 'mã môn học',
-                'subject_name' => 'tên môn học',
-                'credit' => 'số tín chỉ',
+                'subject_code' => __('Subject Code'),
+                'subject_name' => __('Subject Name'),
+                'credit' => __('Credit'),
             ]
         );
 
@@ -107,16 +107,16 @@ class AdminSubjectController extends Controller
         $subject->credit = $request->credit;
         $subject->save();
 
-        return Redirect::route('subject.index')->with("success", 'Cập nhật môn học thành công!');
+        return Redirect::route('subject.index')->with("success", __('The subject has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $code)
+    public function destroy(string $locale = 'vi', string $code)
     {
         Subject::destroy($code);
 
-        return Redirect::route('subject.index')->with("success", 'Xóa môn học thành công!');
+        return Redirect::route('subject.index')->with("success", __('Deleted subject successfully.'));
     }
 }

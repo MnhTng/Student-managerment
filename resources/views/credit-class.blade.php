@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Lớp tín chỉ
+    {{ __('Credit Class') }}
 @endsection
 
 @php
@@ -12,7 +12,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Lớp tín chỉ</h2>
+                <h2>{{ __('Credit Class') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -20,12 +20,12 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="@can('teacher') {{ route('dashboard') }} @endcan @can('student') {{ route('student.dashboard') }} @endcan">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Lớp tín chỉ
+                                {{ __('Credit Class') }}
                             </li>
                         </ol>
                     </nav>
@@ -35,8 +35,8 @@
 
         @if (!$credit_classes)
             <div class="alert alert-warning" role="alert">
-                <h4 class="alert-heading">Chưa có lớp tín chỉ nào!</h4>
-                <p class="mb-0">Vui lòng liên hệ với quản trị viên để được hỗ trợ.</p>
+                <h4 class="alert-heading">{{ __('No credit classes yet!') }}</h4>
+                <p class="mb-0">{{ __('Please contact the administrator for resolution.') }}</p>
             </div>
         @else
             @can('teacher')
@@ -73,25 +73,25 @@
                                             $semester = $class->school_years->semester;
                                         @endphp
 
-                                        <span class="fw-bold">Năm học:</span>
+                                        <span class="fw-bold">{{ __('School Year') }}:</span>
                                         <span>{{ 'Kỳ ' . $semester . ' năm học ' . $school_term }}</span>
                                     </li>
 
                                     <li class="list-group-item d-flex flex-nowrap justify-content-between gap-2">
-                                        <span class="fw-bold">Giảng viên: </span>
+                                        <span class="fw-bold">{{ __('Teacher') }}: </span>
                                         <span>{{ $class->teacher->name }}</span>
                                     </li>
 
                                     <li class="list-group-item d-flex flex-nowrap justify-content-between gap-2">
                                         @php
                                             $dayOfWeek = [
-                                                0 => 'Chủ Nhật',
-                                                1 => 'Thứ Hai',
-                                                2 => 'Thứ Ba',
-                                                3 => 'Thứ Tư',
-                                                4 => 'Thứ Năm',
-                                                5 => 'Thứ Sáu',
-                                                6 => 'Thứ Bảy',
+                                                0 => __('Sunday'),
+                                                1 => __('Monday'),
+                                                2 => __('Tuesday'),
+                                                3 => __('Wednesday'),
+                                                4 => __('Thursday'),
+                                                5 => __('Friday'),
+                                                6 => __('Saturday'),
                                             ];
 
                                             $start_time = explode(' ', $class->start_time)[0];
@@ -106,7 +106,7 @@
                                                     ->format('d/m/Y');
                                         @endphp
 
-                                        <span class="fw-bold">Lịch dạy:</span>
+                                        <span class="fw-bold">{{ __('Schedule') }}:</span>
                                         <span>{{ $schedule }}</span>
                                     </li>
 
@@ -116,7 +116,7 @@
                                             $start_time = date('H:i A', strtotime($start_time));
                                         @endphp
 
-                                        <span class="fw-bold">Thời gian học:</span>
+                                        <span class="fw-bold">{{ __('Start Time') }}:</span>
                                         <span>{{ $start_time }}</span>
                                     </li>
 
@@ -126,7 +126,7 @@
                                             $end_time = date('H:i A', strtotime($end_time));
                                         @endphp
 
-                                        <span class="fw-bold">Thời gian nghỉ:</span>
+                                        <span class="fw-bold">{{ __('End Time') }}:</span>
                                         <span>{{ $end_time }}</span>
                                     </li>
                                 </ul>
@@ -142,11 +142,11 @@
                         <thead class="table-primary">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Mã HP</th>
-                                <th scope="col">Tên HP</th>
-                                <th scope="col">Số TC</th>
-                                <th scope="col">Giảng viên</th>
-                                <th scope="col">Lịch học</th>
+                                <th scope="col">{{ __('Subject Code') }}</th>
+                                <th scope="col">{{ __('Subject Name') }}</th>
+                                <th scope="col">{{ __('Credit') }}</th>
+                                <th scope="col">{{ __('Teacher') }}</th>
+                                <th scope="col">{{ __('Schedule') }}</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -164,13 +164,13 @@
                                     <td>
                                         @php
                                             $dayOfWeek = [
-                                                0 => 'Chủ Nhật',
-                                                1 => 'Thứ Hai',
-                                                2 => 'Thứ Ba',
-                                                3 => 'Thứ Tư',
-                                                4 => 'Thứ Năm',
-                                                5 => 'Thứ Sáu',
-                                                6 => 'Thứ Bảy',
+                                                0 => __('Sunday'),
+                                                1 => __('Monday'),
+                                                2 => __('Tuesday'),
+                                                3 => __('Wednesday'),
+                                                4 => __('Thursday'),
+                                                5 => __('Friday'),
+                                                6 => __('Saturday'),
                                             ];
 
                                             $start_time = explode(' ', $class->start_time)[0];

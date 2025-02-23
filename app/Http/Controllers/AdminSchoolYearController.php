@@ -15,7 +15,7 @@ class AdminSchoolYearController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $school_years = SchoolYear::all();
 
@@ -25,7 +25,7 @@ class AdminSchoolYearController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $locale = 'vi')
     {
         return view('admin.school-year.add');
     }
@@ -33,7 +33,7 @@ class AdminSchoolYearController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $locale = 'vi')
     {
         $request->validate(
             [
@@ -42,20 +42,20 @@ class AdminSchoolYearController extends Controller
                 'end_year' => 'required|regex:/[0-9]{4}/',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'regex' => 'Trường :attribute phải có định dạng 20xx.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'regex' => __('The :attribute field is not in the correct format.'),
             ],
             [
-                'semester' => 'học kỳ',
-                'start_year' => 'năm bắt đầu',
-                'end_year' => 'năm kết thúc',
+                'semester' => __('Semester'),
+                'start_year' => __('Start Year'),
+                'end_year' => __('End Year'),
             ]
         );
 
         $input = $request->all();
 
         if ($input['start_year'] > $input['end_year']) {
-            return Redirect::back()->with('error', 'Năm bắt đầu phải nhỏ hơn năm kết thúc.');
+            return Redirect::back()->with('error', __('The start year must be smaller than the end year.'));
         }
 
         for ($i = $input['start_year']; $i <= $input['end_year']; $i++) {
@@ -72,13 +72,13 @@ class AdminSchoolYearController extends Controller
             }
         }
 
-        return Redirect::route('school-year.index')->with('success', 'Thêm năm học thành công.');
+        return Redirect::route('school-year.index')->with('success', __('School year added successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $locale = 'vi', string $id)
     {
         //
     }
@@ -86,7 +86,7 @@ class AdminSchoolYearController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug)
+    public function edit(string $locale = 'vi', string $slug)
     {
         $school_year = SchoolYear::find($slug);
 
@@ -96,7 +96,7 @@ class AdminSchoolYearController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slug)
+    public function update(Request $request, string $locale = 'vi', string $slug)
     {
         $request->validate(
             [
@@ -104,19 +104,19 @@ class AdminSchoolYearController extends Controller
                 'semester' => 'required',
             ],
             [
-                'required' => 'Trường :attribute không được để trống.',
-                'regex' => 'Trường :attribute phải có định dạng 20xx-20xx.',
+                'required' => __('The :attribute field cannot be empty.'),
+                'regex' => __('The :attribute field is not in the correct format.'),
             ],
             [
-                'school_year' => 'năm học',
-                'semester' => 'học kỳ',
+                'school_year' => __('School Year'),
+                'semester' => __('Semester'),
             ]
         );
 
         $newSlug = $request->school_year . '-' . $request->semester;
 
         if ($newSlug != $slug && SchoolYear::find($newSlug)) {
-            return Redirect::back()->with('error', 'Năm học đã tồn tại.');
+            return Redirect::back()->with('error', __('School year already exists!'));
         }
 
         $school_year = SchoolYear::find($slug);
@@ -125,16 +125,16 @@ class AdminSchoolYearController extends Controller
         $school_year->slug = $request->school_year . '-' . $request->semester;
         $school_year->save();
 
-        return Redirect::route('school-year.index')->with('success', 'Cập nhật năm học thành công.');
+        return Redirect::route('school-year.index')->with('success', __('The school year has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug)
+    public function destroy(string $locale = 'vi', string $slug)
     {
         SchoolYear::destroy($slug);
 
-        return Redirect::route('school-year.index')->with('success', 'Xóa năm học thành công.');
+        return Redirect::route('school-year.index')->with('success', __('Deleted school year successfully.'));
     }
 }

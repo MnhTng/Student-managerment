@@ -15,7 +15,7 @@ use App\Models\Score;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $user = Auth::user()->identifier;
         $student = Student::find($user);
@@ -46,7 +46,7 @@ class DashboardController extends Controller
         } elseif ($gpa[0]->avg_score >= 4.0) {
             $gpa[0]->avg_score = 1.0;
         } else {
-            $gpa[] = 0.0;
+            $gpa[0]->avg_score = 0.0;
         }
 
         return view('dashboard', compact('student', 'credit_classes', 'subjects', 'gpa', 'credit_sum'));

@@ -11,7 +11,7 @@ use App\Models\Student;
 
 class FormalClassController extends Controller
 {
-    public function teacher()
+    public function teacher(string $locale = 'vi')
     {
         $user = Auth::user()->identifier;
         $class = FormalClass::where('mgv', $user)->orderBy('class_code', 'desc')->first();
@@ -19,7 +19,7 @@ class FormalClassController extends Controller
         return view('formal-class', compact('class'));
     }
 
-    public function student()
+    public function student(string $locale = 'vi')
     {
         $user = Auth::user()->identifier;
         $class_code = Student::find($user)->formal_class->class_code;

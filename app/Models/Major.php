@@ -14,6 +14,8 @@ class Major extends Model
         'major_code',
         'major_name',
         'faculty_code',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'major_code';

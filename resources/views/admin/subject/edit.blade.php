@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật môn học
+    {{ __('Update Subject') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Môn học</h2>
+                <h2>{{ __('Subject') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('subject.index') }}">
-                                Môn học
+                                {{ __('Subject') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật môn học</span>
+                            <span>{{ __('Update Subject') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,15 +39,15 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật môn học</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Subject') }}</h4>
 
-                <form class="needs-validation" method="POST" action="{{ route('subject.update', $subject->subject_code) }}"
-                    novalidate>
+                <form class="needs-validation" method="POST"
+                    action="{{ route('subject.update', $subject->subject_code) }}" novalidate>
                     @csrf
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-5 col-12">
-                            <label for="subject_code" class="form-label fw-bold">Mã môn</label>
+                            <label for="subject_code" class="form-label fw-bold">{{ __('Subject Code') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -58,7 +58,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('subject_code') is-invalid @enderror @if (old('subject_code') && !$errors->has('subject_code')) is-valid @endif"
-                                    id="subject_code" name="subject_code" placeholder="Mã môn"
+                                    id="subject_code" name="subject_code" placeholder="{{ __('Subject Code') }}"
                                     value="{{ old('subject_code') ?? $subject->subject_code }}">
 
                                 @error('subject_code')
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-lg-3 col-12">
-                            <label for="credit" class="form-label fw-bold">Tín chỉ</label>
+                            <label for="credit" class="form-label fw-bold">{{ __('Credit') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -87,7 +87,7 @@
                                 </span>
                                 <input type="number" min="0" max="6"
                                     class="form-control @error('credit') is-invalid @enderror @if (old('credit') && !$errors->has('credit')) is-valid @endif"
-                                    id="credit" name="credit" placeholder="Tín chỉ"
+                                    id="credit" name="credit" placeholder="{{ __('Credit') }}"
                                     value="{{ old('credit') ?? $subject->credit }}">
 
                                 @error('credit')
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="subject_name" class="form-label fw-bold">Tên môn học</label>
+                            <label for="subject_name" class="form-label fw-bold">{{ __('Subject Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -116,7 +116,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('subject_name') is-invalid @enderror @if (old('subject_name') && !$errors->has('subject_name')) is-valid @endif"
-                                    id="subject_name" name="subject_name" placeholder="Tên môn học"
+                                    id="subject_name" name="subject_name" placeholder="{{ __('Subject Name') }}"
                                     value="{{ old('subject_name') ?? $subject->subject_name }}">
 
                                 @error('subject_name')
@@ -141,7 +141,8 @@
                             {{ __('Update') }}
                         </button>
 
-                        <a href="{{ route('subject.index') }}" class="btn btn-outline-danger rounded-1">
+                        <a href="{{ route('subject.index') }}"
+                            class="btn btn-outline-danger rounded-1">
                             {{ __('Cancel') }}
                         </a>
                     </div>

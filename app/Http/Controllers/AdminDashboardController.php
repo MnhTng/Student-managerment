@@ -26,7 +26,7 @@ class AdminDashboardController extends Controller
             abort(403);
     }
 
-    public function index()
+    public function index(string $locale = 'vi')
     {
         $facultyNum = Faculty::count();
         $formal_classNum = FormalClass::count();

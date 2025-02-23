@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Thêm thành viên
+    {{ __('Add Member') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Thành viên</h2>
+                <h2>{{ __('Member') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -21,19 +21,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('member.index') }}">
-                                Thành viên
+                                {{ __('Member') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Thêm thành viên</span>
+                            <span>{{ __('Add Member') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -43,14 +43,14 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Thêm thành viên</h4>
+                <h4 class="text-danger mb-3">{{ __('Add Member') }}</h4>
 
                 <form class="needs-validation" method="POST" action="{{ route('member.store') }}" novalidate>
                     @csrf
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-3 col-12">
-                            <label for="role" class="form-label fw-bold">Vai trò</label>
+                            <label for="role" class="form-label fw-bold">{{ __('Role') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -62,15 +62,15 @@
                                 <select
                                     class="form-select @error('role') is-invalid @enderror @if (old('role') && !$errors->has('role')) is-valid @endif"
                                     id="role" name="role" aria-label="Select role">
-                                    <option value="">Chọn vai trò</option>
+                                    <option value="">{{ __('Select Role') }}</option>
                                     <option value="admin" @if (old('role') === 'admin') selected @endif>
-                                        Quản trị viên
+                                        {{ __('Admin') }}
                                     </option>
                                     <option value="teacher" @if (old('role') === 'teacher') selected @endif>
-                                        Giảng viên
+                                        {{ __('Teacher') }}
                                     </option>
                                     <option value="student" @if (old('role') === 'student') selected @endif>
-                                        Sinh viên
+                                        {{ __('Student') }}
                                     </option>
                                 </select>
 
@@ -89,7 +89,7 @@
                         </div>
 
                         <div id="identify" class="col-lg-7 col-12">
-                            <label for="identifier" class="form-label fw-bold">Định danh</label>
+                            <label for="identifier" class="form-label fw-bold">{{ __('Identify') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -99,7 +99,7 @@
                                     </svg>
                                 </span>
                                 <input type="text" class="form-control" id="identifier" name="identifier"
-                                    list="identifiers" placeholder="Xác định người sở hữu" value="{{ old('identifier') }}">
+                                    list="identifiers" placeholder="{{ __('Identify') }}" value="{{ old('identifier') }}">
                                 <datalist id="identifiers">
                                     @foreach ($members as $identifier)
                                         <option value="{{ $identifier->identifier }}">
@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="email" class="form-label fw-bold">Email</label>
+                            <label for="email" class="form-label fw-bold">{{ __('Email') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -134,7 +134,8 @@
                                 </span>
                                 <input type="email"
                                     class="form-control @error('email') is-invalid @enderror @if (old('email') && !$errors->has('email')) is-valid @endif"
-                                    id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                                    id="email" name="email" placeholder="{{ __('Email') }}"
+                                    value="{{ old('email') }}">
 
                                 @error('email')
                                     <div class="invalid-feedback">
@@ -151,7 +152,7 @@
                         </div>
 
                         <div class="col-lg-6 col-12">
-                            <label for="name" class="form-label fw-bold">Tên</label>
+                            <label for="name" class="form-label fw-bold">{{ __('Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -162,7 +163,8 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('name') is-invalid @enderror @if (old('name') && !$errors->has('name')) is-valid @endif"
-                                    id="name" name="name" placeholder="Tên" value="{{ old('name') }}">
+                                    id="name" name="name" placeholder="{{ __('Name') }}"
+                                    value="{{ old('name') }}">
 
                                 @error('name')
                                     <div class="invalid-feedback">
@@ -179,7 +181,7 @@
                         </div>
 
                         <div class="col-lg-4 col-12">
-                            <label for="password" class="form-label fw-bold">Mật khẩu</label>
+                            <label for="password" class="form-label fw-bold">{{ __('Password') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -190,7 +192,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('password') is-invalid @enderror @if (old('password') && !$errors->has('password')) is-valid @endif"
-                                    id="password" name="password" placeholder="Mật khẩu"
+                                    id="password" name="password" placeholder="{{ __('Password') }}"
                                     value="{{ old('password') }}">
 
                                 @error('password')

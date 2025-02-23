@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
         Route::pattern('id', '[0-9]+');
 
         Gate::define('admin', function (User $user) {
@@ -35,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('student', function (User $user) {
             return $user->role === 'student';
+        });
+
+        Route::bind('locale', function ($value) {
+            return $value ?? app()->getLocale();
         });
     }
 }

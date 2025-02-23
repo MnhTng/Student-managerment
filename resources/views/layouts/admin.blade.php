@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="auto">
 
 <head>
     <script src="{{ asset('/js/color-modes.js') }}"></script>
@@ -37,26 +37,6 @@
 </head>
 
 <body>
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-        <symbol id="check2" viewBox="0 0 16 16">
-            <path
-                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-            <path
-                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-            <path
-                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-            <path
-                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-        </symbol>
-    </svg>
-
     <!-- Start -->
     <div class="body-container container-fluid d-flex flex-nowrap p-0 overflow-hidden" style="height: 100dvh;">
         <div id="toggle-sidebar">
@@ -400,6 +380,7 @@
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
@@ -407,62 +388,73 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                         </div>
+
                         <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 mb-lg-0 mb-3">
-                                <li class="nav-item">
-                                    <div class="dropdown bd-mode-toggle">
-                                        <button
-                                            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-                                            id="bd-theme" type="button" aria-expanded="false"
-                                            data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                                            <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                                                <use href="#circle-half"></use>
-                                            </svg>
-                                            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end mt-2 shadow"
-                                            aria-labelledby="bd-theme-text">
-                                            <li>
-                                                <button type="button" class="dropdown-item d-flex align-items-center"
-                                                    data-bs-theme-value="light" aria-pressed="false">
-                                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                                                        <use href="#sun-fill"></use>
-                                                    </svg>
-                                                    {{ __('Light') }}
-                                                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                        <use href="#check2"></use>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button type="button" class="dropdown-item d-flex align-items-center"
-                                                    data-bs-theme-value="dark" aria-pressed="false">
-                                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                                                        <use href="#moon-stars-fill"></use>
-                                                    </svg>
-                                                    {{ __('Dark') }}
-                                                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                        <use href="#check2"></use>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button type="button"
-                                                    class="dropdown-item d-flex align-items-center active"
-                                                    data-bs-theme-value="auto" aria-pressed="true">
-                                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                                                        <use href="#circle-half"></use>
-                                                    </svg>
-                                                    {{ __('Auto') }}
-                                                    <svg class="bi ms-auto d-none" width="1em" height="1em">
-                                                        <use href="#check2"></use>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div id="toggler-theme" class="navbar-nav justify-content-end flex-grow-1 mb-lg-0 mb-3">
+                                <button id="light-theme" type="button"
+                                    class="d-none align-items-center justify-content-center"
+                                    data-bs-theme-value="light" aria-pressed="false">
+                                    <svg viewBox="0 0 24 24" width="24" height="24"
+                                        class="darkToggleIcon_wfgR">
+                                        <path fill="currentColor"
+                                            d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z">
+                                        </path>
+                                    </svg>
+
+                                    <span class="visually-hidden">{{ __('Light') }}</span>
+                                </button>
+
+                                <button id="dark-theme" type="button"
+                                    class="d-none align-items-center justify-content-center"
+                                    data-bs-theme-value="dark" aria-pressed="false">
+                                    <svg viewBox="0 0 24 24" width="24" height="24"
+                                        class="lightToggleIcon_pyhR">
+                                        <path fill="currentColor"
+                                            d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z">
+                                        </path>
+                                    </svg>
+
+                                    <span class="visually-hidden">{{ __('Dark') }}</span>
+                                </button>
+                            </div>
+
+                            <div class="dropdown">
+                                <a class="btn text-white hover-btn-2 mb-3 mb-lg-0 dropdown-toggle float-start d-flex gap-2"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>
+                                        @if (App::isLocale('en'))
+                                            {{ __('English') }}
+                                        @else
+                                            {{ __('Vietnamese') }}
+                                        @endif
+                                    </span>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="24"
+                                        height="24" fill="currentColor">
+                                        <path
+                                            d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
+                                    </svg>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li class="mb-2">
+                                        <a class="dropdown-item d-flex gap-3 align-items-center"
+                                            href="{{ route('lang', ['en']) }}">
+                                            <img src="{{ asset('/uploads/flag/en-flag.png') }}" alt="English"
+                                                class="img-fluid" style="width: 1em;">
+                                            {{ __('English') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex gap-3 align-items-center"
+                                            href="{{ route('lang', ['vi']) }}">
+                                            <img src="{{ asset('/uploads/flag/vi-flag.png') }}" alt="Vietnamese"
+                                                class="img-fluid" style="width: 1em;">
+                                            {{ __('Vietnamese') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <div class="mt-3 mt-lg-0 mb-lg-0 mb-3 mx-lg-3 mx-0">
                                 <div class="search input-group">
@@ -563,12 +555,37 @@
     </div>
     <!-- End -->
 
+    <script>
+        // Variables in data table
+        let sProcessing = @json(__('Processing ...'));
+        let sLengthMenu = @json(__('Show _MENU_ items'));
+        let sZeroRecords = @json(__('No matching records found'));
+        let sInfo = @json(__('Showing _START_ to _END_ of _TOTAL_ items'));
+        let sInfoEmpty = @json(__('Showing 0 to 0 of 0 items'));
+        let sInfoFiltered = @json(__('(filtered from _MAX_ total items)'));
+        let sInfoPostFix = @json(__(''));
+        let sSearch = @json(__('Search:'));
+        let sUrl = @json('');
+        let sEmptyTable = @json(__('No data available in table'));
+        let sLoadingRecords = @json(__('Loading ...'));
+        let sFirst = @json(__('First'));
+        let sLast = @json(__('Last'));
+        let sNext = @json(__('Next'));
+        let sPrevious = @json(__('Previous'));
+        let sSortAscending = @json(__(': activate to sort column ascending'));
+        let sSortDescending = @json(__(': activate to sort column descending'));
+    </script>
+
     <script src="{{ asset('/lib/bootstrap/js/masonry.min.js') }}"></script>
     <script src="{{ asset('/lib/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('/lib/js/sweetAlert2/sweetalert2.all.min.js') }}"></script>
 
     <script src="{{ asset('/lib/js/chart.umd.min.js') }}"></script>
+    <script src="{{ asset('/lib/js/xlsx.full.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+        integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="{{ asset('/js/sidebar.js') }}"></script>
     <script src="{{ asset('/js/datatable.js') }}"></script>

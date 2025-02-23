@@ -13,9 +13,10 @@ class Score extends Model
         'id',
         'msv',
         'subject_code',
-        'semester',
         'school_year',
         'score',
+        'created_at',
+        'updated_at',
     ];
 
     public function student()

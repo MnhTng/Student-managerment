@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật sinh viên
+    {{ __('Update Student') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Sinh viên</h2>
+                <h2>{{ __('Student') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('student.index') }}">
-                                Sinh viên
+                                {{ __('Student') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật sinh viên</span>
+                            <span>{{ __('Update Student') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật sinh viên</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Student') }}</h4>
 
                 <form class="needs-validation d-grid gap-3" method="POST"
                     action="{{ route('student.update', $student->msv) }}" novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-3 col-12">
-                            <label for="msv" class="form-label fw-bold">MSV</label>
+                            <label for="msv" class="form-label fw-bold">{{ __('Student Code') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -58,7 +58,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('msv') is-invalid @enderror @if (old('msv') && !$errors->has('msv')) is-valid @endif"
-                                    id="msv" name="msv" placeholder="MSV"
+                                    id="msv" name="msv" placeholder="{{ __('Student Code') }}"
                                     value="{{ old('msv') ?? $student->msv }}">
 
                                 @error('msv')
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-lg-7 col-12">
-                            <label for="name" class="form-label fw-bold">Họ và tên</label>
+                            <label for="name" class="form-label fw-bold">{{ __('Full Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -87,7 +87,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('name') is-invalid @enderror @if (old('name') && !$errors->has('name')) is-valid @endif"
-                                    id="name" name="name" placeholder="Họ và tên"
+                                    id="name" name="name" placeholder="{{ __('Full Name') }}"
                                     value="{{ old('name') ?? $student->name }}">
 
                                 @error('name')
@@ -107,7 +107,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-4 col-12">
-                            <label for="birthday" class="form-label fw-bold">Ngày sinh</label>
+                            <label for="birthday" class="form-label fw-bold">{{ __('Birthday') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -118,7 +118,7 @@
                                 </span>
                                 <input type="date"
                                     class="form-control @error('birthday') is-invalid @enderror @if (old('birthday') && !$errors->has('birthday')) is-valid @endif"
-                                    id="birthday" name="birthday" placeholder="Ngày sinh"
+                                    id="birthday" name="birthday" placeholder="{{ __('Birthday') }}"
                                     value="{{ old('birthday') ?? $student->birthday }}">
 
                                 @error('birthday')
@@ -136,7 +136,7 @@
                         </div>
 
                         <div class="col-lg-4 col-12">
-                            <label for="phone" class="form-label fw-bold">Số điện thoại</label>
+                            <label for="phone" class="form-label fw-bold">{{ __('Phone') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -147,7 +147,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('phone') is-invalid @enderror @if (old('phone') && !$errors->has('phone')) is-valid @endif"
-                                    id="phone" name="phone" placeholder="SDT"
+                                    id="phone" name="phone" placeholder="{{ __('Phone') }}"
                                     value="{{ old('phone') ?? $student->phone }}">
 
                                 @error('phone')
@@ -165,7 +165,7 @@
                         </div>
 
                         <div class="col-lg-3 col-12">
-                            <label for="gender" class="form-label fw-bold">Giới tính</label>
+                            <label for="gender" class="form-label fw-bold">{{ __('Gender') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -177,11 +177,11 @@
                                 <select
                                     class="form-select @error('gender') is-invalid @enderror @if (old('gender') && !$errors->has('gender')) is-valid @endif"
                                     id="gender" name="gender" aria-label="Select gender">
-                                    <option class="bg-body" value="">Chọn giới tính</option>
+                                    <option class="bg-body" value="">{{ __('Select Gender') }}</option>
                                     <option class="bg-body" value="Nam"
-                                        @if ((old('gender') ?? $student->gender) === 'Nam') selected @endif>Nam</option>
+                                        @if ((old('gender') ?? $student->gender) === 'Nam') selected @endif>{{ __('Male') }}</option>
                                     <option class="bg-body" value="Nữ"
-                                        @if ((old('gender') ?? $student->gender) === 'Nữ') selected @endif>Nữ</option>
+                                        @if ((old('gender') ?? $student->gender) === 'Nữ') selected @endif>{{ __('Female') }}</option>
                                 </select>
 
                                 @error('gender')
@@ -201,7 +201,7 @@
 
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="email" class="form-label fw-bold">Email</label>
+                            <label for="email" class="form-label fw-bold">{{ __('Email') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -212,7 +212,7 @@
                                 </span>
                                 <input type="email"
                                     class="form-control @error('email') is-invalid @enderror @if (old('email') && !$errors->has('email')) is-valid @endif"
-                                    id="email" name="email" placeholder="Email"
+                                    id="email" name="email" placeholder="{{ __('Email') }}"
                                     value="{{ old('email') ?? $student->email }}">
 
                                 @error('email')
@@ -230,7 +230,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="address" class="form-label fw-bold">Địa chỉ</label>
+                            <label for="address" class="form-label fw-bold">{{ __('Address') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -241,7 +241,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('address') is-invalid @enderror @if (old('address') && !$errors->has('address')) is-valid @endif"
-                                    id="address" name="address" placeholder="Địa chỉ"
+                                    id="address" name="address" placeholder="{{ __('Address') }}"
                                     value="{{ old('address') ?? $student->address }}">
 
                                 @error('address')
@@ -261,7 +261,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-6 col-12">
-                            <label for="cccd" class="form-label fw-bold">CCCD</label>
+                            <label for="cccd" class="form-label fw-bold">{{ __('ID Card') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -272,7 +272,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('cccd') is-invalid @enderror @if (old('cccd') && !$errors->has('cccd')) is-valid @endif"
-                                    id="cccd" name="cccd" placeholder="CCCD"
+                                    id="cccd" name="cccd" placeholder="{{ __('ID Card') }}"
                                     value="{{ old('cccd') ?? $student->cccd }}">
 
                                 @error('cccd')
@@ -290,7 +290,7 @@
                         </div>
 
                         <div class="col-lg-4 col-12">
-                            <label for="ethnicity" class="form-label fw-bold">Dân tộc</label>
+                            <label for="ethnicity" class="form-label fw-bold">{{ __('Ethnicity') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -302,7 +302,7 @@
                                 <select
                                     class="form-select @error('ethnicity') is-invalid @enderror @if (old('ethnicity') && !$errors->has('ethnicity')) is-valid @endif"
                                     id="ethnicity" name="ethnicity" aria-label="Select ethnicity">
-                                    <option class="bg-body" value="">Chọn dân tộc</option>
+                                    <option class="bg-body" value="">{{ __('Select Ethnicity') }}</option>
 
                                     @foreach ($ethnicity as $item)
                                         <option class="bg-body" value="{{ $item }}"
@@ -329,7 +329,7 @@
 
                     <div class="row g-3 d-flex justify-content-between">
                         <div class="col-lg-3 col-12">
-                            <label for="faculty" class="form-label fw-bold">Khoa</label>
+                            <label for="faculty" class="form-label fw-bold">{{ __('Faculty') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -341,7 +341,7 @@
                                 <select
                                     class="form-select @error('faculty') is-invalid @enderror @if (old('faculty') && !$errors->has('faculty')) is-valid @endif"
                                     id="faculty" name="faculty" aria-label="Select faculty">
-                                    <option class="bg-body" value="">Chọn khoa</option>
+                                    <option class="bg-body" value="">{{ __('Select Faculty') }}</option>
 
                                     @foreach ($faculties as $faculty)
                                         <option class="bg-body" value="{{ $faculty->faculty_code }}"
@@ -366,7 +366,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="major" class="form-label fw-bold">Ngành</label>
+                            <label for="major" class="form-label fw-bold">{{ __('Major') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -378,7 +378,7 @@
                                 <select
                                     class="form-select @error('major') is-invalid @enderror @if (old('major') && !$errors->has('major')) is-valid @endif"
                                     id="major" name="major" aria-label="Select major">
-                                    <option class="bg-body" value="">Chọn ngành</option>
+                                    <option class="bg-body" value="">{{ __('Select Major') }}</option>
 
                                     @foreach ($majors as $major)
                                         <option class="bg-body" value="{{ $major->major_code }}"
@@ -403,7 +403,7 @@
                         </div>
 
                         <div class="col-lg-3 col-12">
-                            <label for="formal_class" class="form-label fw-bold">Lớp</label>
+                            <label for="formal_class" class="form-label fw-bold">{{ __('Formal Class') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -415,7 +415,7 @@
                                 <select
                                     class="form-select @error('formal_class') is-invalid @enderror @if (old('formal_class') && !$errors->has('formal_class')) is-valid @endif"
                                     id="formal_class" name="formal_class" aria-label="Select formal class">
-                                    <option class="bg-body" value="">Chọn lớp</option>
+                                    <option class="bg-body" value="">{{ __('Select Formal Class') }}</option>
 
                                     @foreach ($formal_classes as $formal_class)
                                         <option class="bg-body" value="{{ $formal_class->class_code }}"
@@ -440,7 +440,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="training_system" class="form-label fw-bold">Hệ đào tạo</label>
+                            <label for="training_system" class="form-label fw-bold">{{ __('Training System') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -452,7 +452,7 @@
                                 <select
                                     class="form-select @error('training_system') is-invalid @enderror @if (old('training_system') && !$errors->has('training_system')) is-valid @endif"
                                     id="training_system" name="training_system" aria-label="Select training system">
-                                    <option class="bg-body" value="">Chọn hệ đào tạo</option>
+                                    <option class="bg-body" value="">{{ __('Select Training System') }}</option>
 
                                     @foreach ($training_systems as $training_system)
                                         <option class="bg-body" value="{{ $training_system->training_code }}"
@@ -477,7 +477,7 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
-                            <label for="academic_year" class="form-label fw-bold">Niên khóa</label>
+                            <label for="academic_year" class="form-label fw-bold">{{ __('School Year') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -488,7 +488,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('academic_year') is-invalid @enderror @if (old('academic_year') && !$errors->has('academic_year')) is-valid @endif"
-                                    id="academic_year" name="academic_year" placeholder="Niên khóa"
+                                    id="academic_year" name="academic_year" placeholder="{{ __('School Year') }}"
                                     value="{{ old('academic_year') ?? $student->academic_year }}">
 
                                 @error('academic_year')

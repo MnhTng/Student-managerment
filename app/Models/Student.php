@@ -24,6 +24,8 @@ class Student extends Model
         'major_code',
         'training_code',
         'academic_year',
+        'created_at',
+        'updated_at',
     ];
 
     protected $primaryKey = 'msv';

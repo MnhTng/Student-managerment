@@ -11,7 +11,7 @@ use App\Models\CreditClass;
 
 class CreditClassController extends Controller
 {
-    public function teacher()
+    public function teacher(string $locale = 'vi')
     {
         $first_semester = range(7, 12);
         $second_semester = range(1, 6);
@@ -54,7 +54,7 @@ class CreditClassController extends Controller
         return view('credit-class', compact('credit_classes'));
     }
 
-    public function student()
+    public function student(string $locale = 'vi')
     {
         $first_semester = range(7, 12);
         $second_semester = range(1, 6);

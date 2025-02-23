@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Cập nhật hệ đào tạo
+    {{ __('Update Training System') }}
 @endsection
 
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Hệ đào tạo</h2>
+                <h2>{{ __('Training System') }}</h2>
             </div>
 
             <div class="col-12 col-md d-flex justify-content-start justify-content-md-end me-sm-5 me-1">
@@ -17,19 +17,19 @@
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('dashboard') }}">
-                                Trang chủ
+                                {{ __('Dashboard') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item d-flex align-items-end">
                             <a class="underline_center link-danger fw-semibold text-decoration-none"
                                 href="{{ route('training-system.index') }}">
-                                Hệ đào tạo
+                                {{ __('Training System') }}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                            <span>Cập nhật hệ đào tạo</span>
+                            <span>{{ __('Update Training System') }}</span>
                         </li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
         <div class="row">
             <div
                 class="container col-md col-12 bg-body-secondary rounded-3 p-4 border-primary border-4 border-bottom-0 border-start-0 border-end-0">
-                <h4 class="text-danger mb-3">Cập nhật hệ đào tạo</h4>
+                <h4 class="text-danger mb-3">{{ __('Update Training System') }}</h4>
 
                 <form class="needs-validation" method="POST"
                     action="{{ route('training-system.update', $training_system->training_code) }}" novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="training_code" class="form-label fw-bold">Mã đào tạo</label>
+                            <label for="training_code" class="form-label fw-bold">{{ __('Training System Code') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -58,7 +58,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('training_code') is-invalid @enderror @if (old('training_code') && !$errors->has('training_code')) is-valid @endif"
-                                    id="training_code" name="training_code" placeholder="Mã đào tạo"
+                                    id="training_code" name="training_code" placeholder="{{ __('Training System Code') }}"
                                     value="{{ old('training_code') ?? $training_system->training_code }}">
 
                                 @error('training_code')
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="training_name" class="form-label fw-bold">Tên hệ đào tạo</label>
+                            <label for="training_name" class="form-label fw-bold">{{ __('Training System Name') }}</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text border-0 bg-dark">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"
@@ -87,7 +87,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control @error('training_name') is-invalid @enderror @if (old('training_name') && !$errors->has('training_name')) is-valid @endif"
-                                    id="training_name" name="training_name" placeholder="Tên hệ đào tạo"
+                                    id="training_name" name="training_name" placeholder="{{ __('Training System Name') }}"
                                     value="{{ old('training_name') ?? $training_system->training_name }}">
 
                                 @error('training_name')

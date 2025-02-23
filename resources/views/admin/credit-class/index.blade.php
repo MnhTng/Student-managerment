@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Lớp tín chỉ
+    {{ __('Credit Class') }}
 @endsection
 
 @php
@@ -14,9 +14,13 @@
             <div class="add-item"></div>
         @endif
 
+        @if (session('error'))
+            <div class="error-item"></div>
+        @endif
+
         <div class="row mb-4">
             <div class="col-12 col-md">
-                <h2>Lớp tín chỉ</h2>
+                <h2>{{ __('Credit Class') }}</h2>
 
                 <div>
                     <nav class="d-flex align-items-center" aria-label="breadcrumb">
@@ -24,19 +28,34 @@
                             <li class="breadcrumb-item d-flex align-items-end">
                                 <a class="underline_center link-danger fw-semibold text-decoration-none "
                                     href="{{ route('dashboard') }}">
-                                    Trang chủ
+                                    {{ __('Dashboard') }}
                                 </a>
                             </li>
 
                             <li class="breadcrumb-item active d-flex align-items-end" aria-current="page">
-                                Lớp tín chỉ
+                                {{ __('Credit Class') }}
                             </li>
                         </ol>
                     </nav>
                 </div>
             </div>
 
-            <div class="col-12 col-md d-flex justify-content-start justify-content-md-end mt-md-0 mt-3">
+            <div class="col-12 col-md d-flex justify-content-start justify-content-md-end gap-3 mt-md-0 mt-3">
+                {{-- ! Import Excel Form --}}
+                <div id="import-excel-form" class="d-flex justify-content-center">
+                    <form action="{{ route('import.credit-class') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <label for="file" class="hover-btn-1">
+                            <span>{{ __('Import Excel') }}</span>
+                            <span></span>
+                        </label>
+                        <input type="file" id="file" name="file" class="d-none" required>
+
+                        <button type="submit" class="visually-hidden">Import</button>
+                    </form>
+                </div>
+
                 <a href="{{ route('credit-class.create') }}" class="btn btn-bd-primary d-flex gap-2 align-items-center p-2"
                     style="height: fit-content;">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="size-6"
@@ -45,7 +64,7 @@
                             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
 
-                    <span>Thêm lớp tín chỉ</span>
+                    <span>{{ __('Add Credit Class') }}</span>
                 </a>
             </div>
         </div>
@@ -104,25 +123,25 @@
                                     $semester = $class->school_years->semester;
                                 @endphp
 
-                                <span class="fw-bold">Năm học:</span>
+                                <span class="fw-bold">{{ __('School Year') }}:</span>
                                 <span>{{ 'Kỳ ' . $semester . ' năm học ' . $school_term }}</span>
                             </li>
 
                             <li class="list-group-item d-flex flex-nowrap justify-content-between gap-2">
-                                <span class="fw-bold">Giảng viên: </span>
+                                <span class="fw-bold">{{ __('Teacher') }}: </span>
                                 <span>{{ $class->teacher->name }}</span>
                             </li>
 
                             <li class="list-group-item d-flex flex-nowrap justify-content-between gap-2">
                                 @php
                                     $dayOfWeek = [
-                                        0 => 'Chủ Nhật',
-                                        1 => 'Thứ Hai',
-                                        2 => 'Thứ Ba',
-                                        3 => 'Thứ Tư',
-                                        4 => 'Thứ Năm',
-                                        5 => 'Thứ Sáu',
-                                        6 => 'Thứ Bảy',
+                                        0 => __('Sunday'),
+                                        1 => __('Monday'),
+                                        2 => __('Tuesday'),
+                                        3 => __('Wednesday'),
+                                        4 => __('Thursday'),
+                                        5 => __('Friday'),
+                                        6 => __('Saturday'),
                                     ];
 
                                     $start_time = explode(' ', $class->start_time)[0];
@@ -130,7 +149,7 @@
                                     $schedule = $dayOfWeek[$day] . ' ' . date('d/m/Y', strtotime($start_time));
                                 @endphp
 
-                                <span class="fw-bold">Ngày khai giảng:</span>
+                                <span class="fw-bold">{{ __('School opening day') }}:</span>
                                 <span>{{ $schedule }}</span>
                             </li>
 
@@ -140,7 +159,7 @@
                                     $start_time = date('H:i A', strtotime($start_time));
                                 @endphp
 
-                                <span class="fw-bold">Thời gian học:</span>
+                                <span class="fw-bold">{{ __('Start Time') }}:</span>
                                 <span>{{ $start_time }}</span>
                             </li>
 
@@ -150,7 +169,7 @@
                                     $end_time = date('H:i A', strtotime($end_time));
                                 @endphp
 
-                                <span class="fw-bold">Thời gian nghỉ:</span>
+                                <span class="fw-bold">{{ __('End Time') }}:</span>
                                 <span>{{ $end_time }}</span>
                             </li>
                         </ul>
@@ -220,6 +239,34 @@
                 Toast.fire({
                     icon: "success",
                     title: "{{ session('success') }}"
+                });
+            }
+        });
+
+        // Sweet Alert: Error Messages
+        document.addEventListener('DOMContentLoaded', function() {
+            const error_item = document.querySelector('.error-item');
+
+            if (error_item) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    background: "rgb(255, 235, 235)",
+                    color: "rgb(110, 29, 29)",
+                    position: "bottom-end",
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                    customClass: {
+                        closeButton: 'd-flex text-danger',
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "{{ session('error') }}"
                 });
             }
         });
